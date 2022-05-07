@@ -1,0 +1,40 @@
+{# Template général de la page #}
+{% extends 'base.html.twig' %}
+
+{# Titre de la page #}
+{% block title %}Mon titre{% endblock %}
+
+{# Ici vous mettez vos codes HTML et balises Twig au besoin #}
+{% block body %}
+    <h1>Mon super titre H1</h1>
+
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <h2>Welcome {{ app.user.firstName }}</h2>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-dropdown">
+            <li>
+                <a class="dropdown-item" href="{{ path('app_logout') }}">Log Out</a>
+            </li>
+        </ul>
+
+    {% else %}
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-dropdown">
+            <li>
+                <h3><a href="{{ path('app_login') }}">Login</a></h3>
+            </li>
+            <li>
+                <h3><a href="{{ path('app_register') }}">Register</a></h3>
+            </li>
+        </ul>
+    {% endif %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-dropdown">
+            <li>
+                <h3><a class="nav-link" href="{{ path('app_admin') }}">Admin</a></h3>
+            </li>
+        </ul>
+    {% endif %}
+
+    <p>Un paragraphe contenant pleins de mots à lire</p>
+
+{% endblock %}

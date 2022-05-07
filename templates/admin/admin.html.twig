@@ -1,0 +1,12 @@
+{# Template général de la page #}
+{% extends 'base.html.twig' %}
+
+{# Titre de la page #}
+{% block title %}Je suis Admin{% endblock %}
+
+{# Ici vous mettez vos codes HTML et balises Twig au besoin #}
+{% block body %}
+    <h1>Je suis Admin</h1> <h1><a href="{{ path('app_home') }}">Retour !</a></h1>
+    <p>Un paragraphe contenant pleins de mots à lire</p>
+
+{% endblock %}
