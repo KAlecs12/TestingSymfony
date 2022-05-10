@@ -42,6 +42,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $imageFilename;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $facturation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -148,6 +153,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setImageFilename(?string $imageFilename): self
     {
         $this->imageFilename = $imageFilename;
+
+        return $this;
+    }
+
+    public function getFacturation(): ?string
+    {
+        return $this->facturation;
+    }
+
+    public function setFacturation(?string $facturation): self
+    {
+        $this->facturation = $facturation;
 
         return $this;
     }

@@ -9,7 +9,10 @@
     <h1>Je suis Admin</h1>
 
     {{ form_start(form) }}
+{#    {{ form_row(form.firstName) }}#}
+    <br>
     {{ form_row(form.imageFilename) }}
+    <br>
     <button type="submit" class="btn btn-primary">Upload!</button>
     {{ form_end(form) }}
 
