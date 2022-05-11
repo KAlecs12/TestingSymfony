@@ -10,6 +10,7 @@
 
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         <h2>Welcome {{ app.user.firstName }}</h2>
+        <a href="{{path('download_file')}}" target="_blank">Download file</a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-dropdown">
             <li>
                 <a class="dropdown-item" href="{{ path('app_logout') }}">Log Out</a>
