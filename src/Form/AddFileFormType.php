@@ -19,9 +19,9 @@ class AddFileFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-
             ->add('firstName', EntityType::class, [
                 'label' => 'Nom : ',
+                'mapped' => false,
                 'class' => User::class,
                 'choice_label' => 'firstName'
             ])
