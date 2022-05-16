@@ -20,7 +20,7 @@ class Contact
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $suejt;
+    private $sujet;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -37,14 +37,14 @@ class Contact
         return $this->id;
     }
 
-    public function getSuejt(): ?string
+    public function getSujet(): ?string
     {
-        return $this->suejt;
+        return $this->sujet;
     }
 
-    public function setSuejt(string $suejt): self
+    public function setSujet(string $sujet): self
     {
-        $this->suejt = $suejt;
+        $this->suejt = $sujet;
 
         return $this;
     }
