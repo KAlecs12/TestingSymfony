@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -46,6 +48,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $facturation;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=stage::class, inversedBy="users")
+     */
+    private $id_stage;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Recapitulatif::class, inversedBy="users")
+     */
+    private $idRecapitulatif;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ReservationRdv::class, mappedBy="idUser")
+     */
+    private $reservationRdvs;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Contact::class, mappedBy="idUser")
+     */
+    private $contacts;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Facture::class, mappedBy="idUser")
+     */
+    private $factures;
+
+    public function __construct()
+    {
+        $this->id_stage = new ArrayCollection();
+        $this->reservationRdvs = new ArrayCollection();
+        $this->contacts = new ArrayCollection();
+        $this->factures = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -165,6 +200,132 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFacturation(?string $facturation): self
     {
         $this->facturation = $facturation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, stage>
+     */
+    public function getIdStage(): Collection
+    {
+        return $this->id_stage;
+    }
+
+    public function addIdStage(stage $idStage): self
+    {
+        if (!$this->id_stage->contains($idStage)) {
+            $this->id_stage[] = $idStage;
+        }
+
+        return $this;
+    }
+
+    public function removeIdStage(stage $idStage): self
+    {
+        $this->id_stage->removeElement($idStage);
+
+        return $this;
+    }
+
+    public function getIdRecapitulatif(): ?Recapitulatif
+    {
+        return $this->idRecapitulatif;
+    }
+
+    public function setIdRecapitulatif(?Recapitulatif $idRecapitulatif): self
+    {
+        $this->idRecapitulatif = $idRecapitulatif;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ReservationRdv>
+     */
+    public function getReservationRdvs(): Collection
+    {
+        return $this->reservationRdvs;
+    }
+
+    public function addReservationRdv(ReservationRdv $reservationRdv): self
+    {
+        if (!$this->reservationRdvs->contains($reservationRdv)) {
+            $this->reservationRdvs[] = $reservationRdv;
+            $reservationRdv->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservationRdv(ReservationRdv $reservationRdv): self
+    {
+        if ($this->reservationRdvs->removeElement($reservationRdv)) {
+            // set the owning side to null (unless already changed)
+            if ($reservationRdv->getIdUser() === $this) {
+                $reservationRdv->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contact>
+     */
+    public function getContacts(): Collection
+    {
+        return $this->contacts;
+    }
+
+    public function addContact(Contact $contact): self
+    {
+        if (!$this->contacts->contains($contact)) {
+            $this->contacts[] = $contact;
+            $contact->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContact(Contact $contact): self
+    {
+        if ($this->contacts->removeElement($contact)) {
+            // set the owning side to null (unless already changed)
+            if ($contact->getIdUser() === $this) {
+                $contact->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Facture>
+     */
+    public function getFactures(): Collection
+    {
+        return $this->factures;
+    }
+
+    public function addFacture(Facture $facture): self
+    {
+        if (!$this->factures->contains($facture)) {
+            $this->factures[] = $facture;
+            $facture->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFacture(Facture $facture): self
+    {
+        if ($this->factures->removeElement($facture)) {
+            // set the owning side to null (unless already changed)
+            if ($facture->getIdUser() === $this) {
+                $facture->setIdUser(null);
+            }
+        }
 
         return $this;
     }
