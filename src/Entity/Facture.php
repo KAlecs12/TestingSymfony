@@ -28,7 +28,7 @@ class Facture
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="factures")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="factures")
      */
     private $idUser;
 

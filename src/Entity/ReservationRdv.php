@@ -18,7 +18,7 @@ class ReservationRdv
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="reservationRdvs")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reservationRdvs")
      */
     private $idUser;
 

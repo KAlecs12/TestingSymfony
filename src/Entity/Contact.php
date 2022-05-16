@@ -28,7 +28,7 @@ class Contact
     private $message;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="contacts")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="contacts")
      */
     private $idUser;
 

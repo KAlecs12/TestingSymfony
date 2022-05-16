@@ -50,7 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $facturation;
 
     /**
-     * @ORM\ManyToMany(targetEntity=stage::class, inversedBy="users")
+     * @ORM\ManyToMany(targetEntity=Stage::class, inversedBy="users")
      */
     private $id_stage;
 
