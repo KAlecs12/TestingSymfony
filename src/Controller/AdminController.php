@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Facture;
 use App\Entity\User;
 use App\Form\AddFileFormType;
 use App\Services\FileUploader;
@@ -23,9 +24,9 @@ class AdminController extends AbstractController
     public function new(Request $request, SluggerInterface $slugger, FileUploader $fileUploader, ManagerRegistry $doctrine): Response
     {
         $user = new User();
+        $facture = new Facture();
         $form = $this->createForm(AddFileFormType::class, $user);
         $form->handleRequest($request);
-
 
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
@@ -34,12 +35,17 @@ class AdminController extends AbstractController
                 $uploadedFile = $form->get('imageFilename')->getData();
                 $userc = $form->get('firstName')->getData();
                 $user = $userc;
+
+
                 if ($uploadedFile) {
                     $uploadedFileName = $fileUploader->upload($uploadedFile);
-                    $user->setFacturation('/public/uploads/'.$uploadedFileName);
+                    $facture->setIdUser($user);
+                    $facture->setTitre(date('D, F, Y'));
+                    $facture->setContent('/public/uploads/'.$uploadedFileName);
+
 
                     $entityManager = $doctrine->getManager();
-                    $entityManager->persist($user);
+                    $entityManager->persist($facture);
                     $entityManager->flush();
                 }
 

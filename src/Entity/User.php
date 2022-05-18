@@ -44,10 +44,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $imageFilename;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $facturation;
 
     /**
      * @ORM\ManyToMany(targetEntity=Stage::class, inversedBy="users")
@@ -73,6 +69,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\OneToMany(targetEntity=Facture::class, mappedBy="idUser")
      */
     private $factures;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lastName;
 
     public function __construct()
     {
@@ -188,18 +189,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setImageFilename(?string $imageFilename): self
     {
         $this->imageFilename = $imageFilename;
-
-        return $this;
-    }
-
-    public function getFacturation(): ?string
-    {
-        return $this->facturation;
-    }
-
-    public function setFacturation(?string $facturation): self
-    {
-        $this->facturation = $facturation;
 
         return $this;
     }
@@ -326,6 +315,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $facture->setIdUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
 
         return $this;
     }

@@ -66,7 +66,7 @@ class Facture
         return $this->idUser;
     }
 
-    public function setIdUser(?user $idUser): self
+    public function setIdUser(user $idUser): self
     {
         $this->idUser = $idUser;
 
