@@ -166,8 +166,7 @@ ul {
 }
 ul li a {
     line-height: 40px;
-
-    color: #fff;
+    color: #aec676;
     padding: 10px 30px;
     text-decoration: none;
     font-size: 14px;
@@ -175,8 +174,16 @@ ul li a {
 }
 
 ul li a:hover {
-    background: rgba(0, 0, 0, 0.163);
+    background: rgba(211, 211, 211, 0.06);
     border-radius: 6px;
+    color: #fff;
+}
+
+.white {
+    color: #FFFFFF;
+}
+.white:hover {
+    color: #aec676;
 }
 
 .dropdown {
@@ -266,4 +273,34 @@ label{
 
 input#add_file_form_imageFilename{
     color: white;
+}
+
+.back {
+    display: flex;
+}
+
+/* PAGE RDV */
+
+#calendrier{
+    width: 90%;
+    margin: auto;
+    background-color: white;
+    border-radius: 3% 3% 0 0;
+}
+.calendar-form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    background-color: rgba(55, 45, 29, 0.9);
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 5px;
+    box-shadow: 0 2px 12px 2px rgba(0, 0, 0, 1);
+    border-color: rgba(18, 14, 1, 1) rgba(18, 14, 1, 1) rgba(18, 14, 1, 1) rgba(18, 14, 1, 1);
+    border-width: 2px 2px 2px 2px;
+    border-style: solid solid solid solid;
+    padding-top: 0.5%;
+    padding-bottom: 3%;
+    width: 70%;
+
 }

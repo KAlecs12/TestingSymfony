@@ -7,28 +7,6 @@
 {# Ici vous mettez vos codes HTML et balises Twig au besoin #}
 {% block body %}
 
-
-<head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-    <div class="header-container">
-        <hr class="hrbar">
-        <div class="logo">
-            <img id="logoimg" src="{{ asset('images/logo.png')}}" alt="">
-        </div>
-        <ul class="headernav">
-            <li><a href="/home">PRENDRE RENDEZ-VOUS</a></li>
-            <li><a href="/equipe">CONTACT</a></li>
-
-        </ul>
-        <hr class="hrbar">
-    </div>
-
     <div class="profile-container">
 
         <div class="profile-form">
@@ -47,11 +25,10 @@
                         </div>
                         <br>
 
-
                         <div class="panel panel-default">
-                            <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
-                            <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
-                            <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
+                            <div class="panel-heading">Informations <i class="fa fa-link fa-1x"></i></div>
+                            <li class="list-group-item text-right"><span class="pull-left"><strong>Rendez-vous</strong></span> 125</li>
+                            <li class="list-group-item text-right"><span class="pull-left"><strong>Messages</strong></span> 13</li>
                             <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
                             <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
                         </div>
@@ -70,17 +47,15 @@
                             <li>
                                 <a class="dropdown-item" href="{{ path('app_logout') }}">Log Out</a>
                             </li>
-                            {% if is_granted('ROLE_ADMIN') %}
-                                    <li>
-                                        <a class="nav-link" href="{{ path('app_admin') }}">Admin</a>
-                                    </li>
-                            {% endif %}
+
                         </ul>
 
                         <!-- MENU 1 -->
                         <div class="tab-content">
                             <div class="tab-pane active" id="home">
+                                <div class="background">
 
+                                </div>
 
                             </div>
 
