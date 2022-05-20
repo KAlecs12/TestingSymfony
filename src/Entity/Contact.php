@@ -5,36 +5,23 @@ namespace App\Entity;
 use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=ContactRepository::class)
- */
+#[ORM\Entity(repositoryClass: ContactRepository::class)]
 class Contact
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private $id_contact;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 45, nullable: true)]
     private $sujet;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $message;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="contacts")
-     */
-    private $idUser;
 
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->id_contact;
     }
 
     public function getSujet(): ?string
@@ -42,9 +29,9 @@ class Contact
         return $this->sujet;
     }
 
-    public function setSujet(string $sujet): self
+    public function setSujet(?string $sujet): self
     {
-        $this->suejt = $sujet;
+        $this->sujet = $sujet;
 
         return $this;
     }
@@ -54,21 +41,9 @@ class Contact
         return $this->message;
     }
 
-    public function setMessage(string $message): self
+    public function setMessage(?string $message): self
     {
         $this->message = $message;
-
-        return $this;
-    }
-
-    public function getIdUser(): ?user
-    {
-        return $this->idUser;
-    }
-
-    public function setIdUser(?user $idUser): self
-    {
-        $this->idUser = $idUser;
 
         return $this;
     }

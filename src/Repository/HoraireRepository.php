@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\Rdv;
+use App\Entity\Horaire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Rdv>
+ * @extends ServiceEntityRepository<Horaire>
  *
- * @method Rdv|null find($id, $lockMode = null, $lockVersion = null)
- * @method Rdv|null findOneBy(array $criteria, array $orderBy = null)
- * @method Rdv[]    findAll()
- * @method Rdv[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Horaire|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Horaire|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Horaire[]    findAll()
+ * @method Horaire[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RdvRepository extends ServiceEntityRepository
+class HoraireRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Rdv::class);
+        parent::__construct($registry, Horaire::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Rdv $entity, bool $flush = true): void
+    public function add(Horaire $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class RdvRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Rdv $entity, bool $flush = true): void
+    public function remove(Horaire $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,15 +48,15 @@ class RdvRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Rdv[] Returns an array of Rdv objects
+    //  * @return Horaire[] Returns an array of Horaire objects
     //  */
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
+        return $this->createQueryBuilder('h')
+            ->andWhere('h.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
+            ->orderBy('h.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -65,10 +65,10 @@ class RdvRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Rdv
+    public function findOneBySomeField($value): ?Horaire
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
+        return $this->createQueryBuilder('h')
+            ->andWhere('h.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()

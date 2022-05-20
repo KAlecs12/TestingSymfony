@@ -2,35 +2,31 @@
 
 namespace App\Entity;
 
-use App\Repository\RDVRepository;
+use App\Repository\RdvRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=RDVRepository::class)
- */
-class RDV
+#[ORM\Entity(repositoryClass: RdvRepository::class)]
+class Rdv
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="date")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $date;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $time;
+    #[ORM\Column(type: 'string', length: 45)]
+    private $type;
 
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $price;
+    #[ORM\Column(type: 'float')]
+    private $tarification;
+
+    #[ORM\ManyToOne(targetEntity: Installation::class, inversedBy: 'rdvs')]
+    private $id_installation;
+
+    #[ORM\ManyToOne(targetEntity: Professionnel::class, inversedBy: 'rdvs')]
+    private $id_professionnel;
 
     public function getId(): ?int
     {
@@ -49,26 +45,50 @@ class RDV
         return $this;
     }
 
-    public function getTime(): ?int
+    public function getType(): ?string
     {
-        return $this->time;
+        return $this->type;
     }
 
-    public function setTime(int $time): self
+    public function setType(string $type): self
     {
-        $this->time = $time;
+        $this->type = $type;
 
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getTarification(): ?float
     {
-        return $this->price;
+        return $this->tarification;
     }
 
-    public function setPrice(float $price): self
+    public function setTarification(float $tarification): self
     {
-        $this->price = $price;
+        $this->tarification = $tarification;
+
+        return $this;
+    }
+
+    public function getIdInstallation(): ?Installation
+    {
+        return $this->id_installation;
+    }
+
+    public function setIdInstallation(?Installation $id_installation): self
+    {
+        $this->id_installation = $id_installation;
+
+        return $this;
+    }
+
+    public function getIdProfessionnel(): ?Professionnel
+    {
+        return $this->id_professionnel;
+    }
+
+    public function setIdProfessionnel(?Professionnel $id_professionnel): self
+    {
+        $this->id_professionnel = $id_professionnel;
 
         return $this;
     }
