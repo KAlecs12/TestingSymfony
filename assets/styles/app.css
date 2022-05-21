@@ -54,7 +54,6 @@
     flex-direction: column;
     margin: auto;
     align-items: center;
-    /*background-color: #4b432a;*/
     background-color: rgba(55, 45, 29, 0.9);
     margin-top: 40px;
     margin-bottom: 40px;
@@ -67,7 +66,32 @@
     width: 350px;
     justify-content: center;
 }
+.dashboard-form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+    background-color: rgba(55, 45, 29, 0.9);
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 5px;
+    box-shadow: 0 2px 12px 2px rgba(0, 0, 0, 1);
+    border-color: rgba(18, 14, 1, 1) rgba(18, 14, 1, 1) rgba(18, 14, 1, 1) rgba(18, 14, 1, 1);
+    border-width: 2px 2px 2px 2px;
+    border-style: solid solid solid solid;
+    height: 700px;
+    width: 65%;
 
+}
+
+.dashboard-form h1{
+    color: #aec676;
+}
+
+.dashboard-form table{
+    color: white;
+    margin: 3% 0 3% 0;
+}
 
 .profile-form h2 {
     font-size: 24px;
@@ -82,7 +106,10 @@
     letter-spacing: 2px;
 
 }
+.profile-form ul {
+    justify-content: center;
 
+}
 .profile-form input {
     display: block;
     border-color: #aec676;
@@ -155,7 +182,9 @@ ul {
     display: flex;
     margin-top: 10px;
     margin-bottom: -20px;
+    align-items: center;
 }
+
 
 .headernav {
     margin-top: 10px;
@@ -171,6 +200,7 @@ ul li a {
     text-decoration: none;
     font-size: 14px;
     font-weight: bold;
+
 }
 
 ul li a:hover {
@@ -275,17 +305,19 @@ input#add_file_form_imageFilename{
     color: white;
 }
 
-.back {
-    display: flex;
-}
+
 
 /* PAGE RDV */
 
 #calendrier{
     width: 90%;
     margin: auto;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.85);
     border-radius: 3% 3% 0 0;
+}
+
+#calendrier.fc-theme-standard td, .fc-theme-standard th {
+    border: 1px solid rgba(21, 21, 21, 0.9);
 }
 .calendar-form {
     display: flex;
@@ -303,4 +335,28 @@ input#add_file_form_imageFilename{
     padding-bottom: 3%;
     width: 70%;
 
+}
+
+/* MODAL */
+
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+    pointer-events:none; /* This makes sure that we can still click outside of the modal to close it */
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events:none;
+}
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+    max-width:inherit; /* For Bootstrap 4 - to avoid the modal window stretching full width */
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+    pointer-events: all;
 }

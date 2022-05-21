@@ -44,9 +44,7 @@
                             <li class="active"><a data-toggle="tab" href="#home">Accueil</a></li>
                             <li><a data-toggle="tab" href="#messages">Facturations</a></li>
                             <li><a data-toggle="tab" href="#settings">Parametres</a></li>
-                            <li>
-                                <a class="dropdown-item" href="{{ path('app_logout') }}">Log Out</a>
-                            </li>
+
 
                         </ul>
 
@@ -66,7 +64,7 @@
                                 {{ form_start(form) }}
                                 {{ form_row(form.titre) }}
                                 <br>
-                                <button type="submit" class="btn btn-primary">Ouvrir</button>
+                                <button type="submit" class="btn btn-primary" formtarget="_blank">Ouvrir</button>
                                 {{ form_end(form) }}
                             </div>
 

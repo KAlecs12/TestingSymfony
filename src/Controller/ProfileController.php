@@ -25,6 +25,7 @@ class ProfileController extends AbstractController
 
 
             $facture = $form->get('titre')->getData();
+
             $facturation = $facture;
 
             $content = $facturation->getContent();

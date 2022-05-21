@@ -44,27 +44,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $imageFilename;
 
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Stage::class, inversedBy="users")
-     */
-    private $id_stage;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Recapitulatif::class, inversedBy="users")
-     */
-    private $idRecapitulatif;
-
-    /**
-     * @ORM\OneToMany(targetEntity=ReservationRdv::class, mappedBy="idUser")
-     */
-    private $reservationRdvs;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Contact::class, mappedBy="idUser")
-     */
-    private $contacts;
-
     /**
      * @ORM\OneToMany(targetEntity=Facture::class, mappedBy="idUser")
      */
@@ -75,12 +54,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $lastName;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Calendar::class, mappedBy="idUser")
+     */
+    private $calendars;
+
     public function __construct()
     {
         $this->id_stage = new ArrayCollection();
         $this->reservationRdvs = new ArrayCollection();
         $this->contacts = new ArrayCollection();
         $this->factures = new ArrayCollection();
+        $this->calendars = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -230,6 +215,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Calendar>
+     */
+    public function getCalendars(): Collection
+    {
+        return $this->calendars;
+    }
+
+    public function addCalendar(Calendar $calendar): self
+    {
+        if (!$this->calendars->contains($calendar)) {
+            $this->calendars[] = $calendar;
+            $calendar->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalendar(Calendar $calendar): self
+    {
+        if ($this->calendars->removeElement($calendar)) {
+            // set the owning side to null (unless already changed)
+            if ($calendar->getIdUser() === $this) {
+                $calendar->setIdUser(null);
+            }
+        }
 
         return $this;
     }

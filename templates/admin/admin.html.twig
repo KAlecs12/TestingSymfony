@@ -9,24 +9,66 @@
 
         <div class="profile-container">
 
-            <div class="admin-form">
-                <hr>
-                {{ form_start(form) }}
-                {{ form_row(form.firstName) }}
-                <br>
-                {{ form_row(form.imageFilename) }}
-                <br>
-                <button type="submit" class="btn btn-primary">Upload!</button>
-                {{ form_end(form) }}
-
-                {#    <form method="POST" action="{{ path('upload_test') }}" enctype="multipart/form-data">#}
-                {#        <input type="file" name="image">#}
-
-                {#        <button type="submit" class="btn btn-primary">Upload!</button>#}
-                {#    </form>#}
+            <div class="profile-form">
+                <div class="col-sm-9">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#home">Accueil</a></li>
+                        <li><a data-toggle="tab" href="#messages">Facturations</a></li>
+                        <li><a data-toggle="tab" href="#settings">Ajouter Client</a></li>
 
 
-                <h1><a href="{{ path('app_profile') }}">Retour !</a></h1>
+                    </ul>
+
+                    <!-- MENU 1 -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="home">
+
+
+                        </div>
+
+                        <!-- MENU 2 -->
+
+                        <div class="tab-pane" id="messages">
+                            <div class="background">
+                                <hr>
+                                {{ form_start(form) }}
+                                {{ form_row(form.firstName) }}
+                                <br>
+                                {{ form_row(form.imageFilename) }}
+                                <br>
+                                <button type="submit" class="btn btn-primary">Upload!</button>
+                                {{ form_end(form) }}
+
+                                <h1><a href="{{ path('app_profile') }}">Retour !</a></h1>
+                            </div>
+                        </div>
+
+                        <!-- MENU 3 -->
+
+                        <div class="tab-pane" id="settings">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="bg-light mt-4 p-4">
+                                        <h1>Register</h1>
+
+                                        {{ form_start(form2) }}
+                                        {{ form_row(form2.firstName) }}
+                                        {{ form_row(form2.lastName) }}
+                                        {{ form_row(form2.email) }}
+                                        {{ form_row(form2.plainPassword, {
+                                            label: 'Password'
+                                        }) }}
+
+                                        <button type="submit" class="btn">Register</button>
+                                        {{ form_end(form2) }}
+                                        <h2><a href="{{ path('app_admin') }}">Go back</a></h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!--/tab-pane-->
+                </div><!--/tab-content-->
 
             </div>
         </div>
