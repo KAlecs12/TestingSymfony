@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\Rdv;
+use App\Entity\RDV;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Rdv>
+ * @extends ServiceEntityRepository<RDV>
  *
- * @method Rdv|null find($id, $lockMode = null, $lockVersion = null)
- * @method Rdv|null findOneBy(array $criteria, array $orderBy = null)
- * @method Rdv[]    findAll()
- * @method Rdv[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method RDV|null find($id, $lockMode = null, $lockVersion = null)
+ * @method RDV|null findOneBy(array $criteria, array $orderBy = null)
+ * @method RDV[]    findAll()
+ * @method RDV[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RdvRepository extends ServiceEntityRepository
+class RDVRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -27,7 +27,7 @@ class RdvRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Rdv $entity, bool $flush = true): void
+    public function add(RDV $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class RdvRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Rdv $entity, bool $flush = true): void
+    public function remove(RDV $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
