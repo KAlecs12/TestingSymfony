@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\RdvRepository;
+use App\Repository\RDVRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: RdvRepository::class)]
-class Rdv
+#[ORM\Entity(repositoryClass: RDVRepository::class)]
+class RDV
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
