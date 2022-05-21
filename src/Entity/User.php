@@ -10,69 +10,35 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- */
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer")]
     private $id;
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
+
+    #[ORM\Column(type:"string", length:180, unique: true)]
     private $email;
-    /**
-     * @ORM\Column(type="json")
-     */
+
+    #[ORM\Column(type:"json")]
     private $roles = [];
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    
+    #[ORM\Column(type:"string", length:255, nullable:true)]
     private $firstName;
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    
+    #[ORM\Column(type:"string", length:255)]
     private $password;
     private $plainPassword;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    
+    #[ORM\Column(type:"string", length:255, nullable:true)]
     private $imageFilename;
 
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Stage::class, inversedBy="users")
-     */
-    private $id_stage;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Recapitulatif::class, inversedBy="users")
-     */
-    private $idRecapitulatif;
-
-    /**
-     * @ORM\OneToMany(targetEntity=ReservationRdv::class, mappedBy="idUser")
-     */
-    private $reservationRdvs;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Contact::class, mappedBy="idUser")
-     */
-    private $contacts;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Facture::class, mappedBy="idUser")
-     */
+    #[ORM\OneToMany(targetEntity:Facture::class, mappedBy:"idUser")]
     private $factures;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    
+    #[ORM\Column(type:"string", length:255)]
     private $lastName;
 
     public function __construct()

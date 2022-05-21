@@ -16,7 +16,7 @@ class Soin
     #[ORM\Column(type: 'string', length: 255)]
     private $titre;
 
-    #[ORM\Column(type: 'string', length: 65535)]
+    #[ORM\Column(type: 'text')]
     private $description;
 
     public function getId(): ?int
@@ -47,6 +47,5 @@ class Soin
 
         return $this;
     }
-
     
 }
