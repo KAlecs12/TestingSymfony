@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendar index{% endblock %}
+
+{% block body %}
+    <div class="profile-container">
+
+        <div class="dashboard-form">
+            <div>
+                <ul>
+                    <li><a href="/rdv">Retour</a></li>
+                    <h1>Calendar index</h1>
+                </ul>
+
+            </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Description</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for calendar in calendars|reverse %}
+                <tr>
+
+                    <td>{{ calendar.title }}</td>
+                    <td>{{ calendar.start ? calendar.start|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ calendar.end ? calendar.end|date('Y-m-d H:i:s') : '' }}</td>
+                    <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 20ch;">{{ calendar.description }}</td>
+
+                    <td>
+                        <a href="{{ path('app_calendar_show', {'id': calendar.id}) }}">show</a>
+                        <a href="{{ path('app_calendar_edit', {'id': calendar.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    <a href="{{ path('app_calendar_new') }}">Create new</a>
+        </div>
+    </div>
+{% endblock %}

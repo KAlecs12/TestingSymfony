@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page Rdv{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css"
+          integrity="sha256-5veQuRbWaECuYxwap/IOE/DAwNxgm4ikX7nrgsqYp88=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"
+            integrity="sha256-XCdgoNaBjzkUaEJiauEq+85q/xi/2D4NcB3ZHwAapoM=" crossorigin="anonymous"></script>
+
+    <!-- Modal -->
+
+    <div id="calendarModal" class="modal fade">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center">
+                <div class="modal-content ">
+                    {{ form_start(form) }}
+                    <div class="modal-header">
+                        <h4 id="modalTitle" class="modal-title"></h4>
+                    </div>
+                    <div id="modalBody" class="modal-body">
+
+                       {{ form_row(form.id) }}
+                        <br>
+                        <button type="submit" class="btn btn-primary">Accepter</button>
+
+                    </div>
+                    {{ form_end(form) }}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-container">
+        <div class="calendar-form">
+            <ul>
+                <li><a href="/profile">Retour</a></li>
+            </ul>
+            {% if is_granted('ROLE_ADMIN') %}
+                <li>
+                    <a class="nav-link white" href="{{ path('app_calendar_index') }}">Admin</a>
+                </li>
+            {% endif %}
+            <div id="calendrier">
+        </div>
+    </div>
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+<script>
+
+    window.onload = () => {
+        let calendarElt = document.querySelector("#calendrier")
+
+        let calendar = new FullCalendar.Calendar(calendarElt, {
+            initialView: 'timeGridWeek',
+            locale: 'Fr',
+            timeZone: 'Europe/Paris',
+            slotMinTime: "09:00",
+            slotMaxTime: "19:00",
+            height: "auto",
+            headerToolbar: {
+                start: 'timeGridWeek dayGridMonth',
+                center: 'title',
+                end: 'today prev,next'
+            },
+            events: {{ data | raw }},
+            allDaySlot: false,
+            eventClick:  function(event, jsEvent, view) {
+
+                $('#get_rdv_id').html(event.event.id);
+                $('#modalBody').html(event.event.description);
+                $('#calendarModal').modal("show");
+            },
+        })
+        calendar.render()
+    }
+</script>
+{% endblock %}
