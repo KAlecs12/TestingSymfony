@@ -29,7 +29,7 @@ use Doctrine\ORM\Mapping as ORM;
     private $Duree_moyenne;
 
     /**
-     * @ORM\OneToMany(mappedBy= "id_professionnel", targetEntity= Rdv::class)
+     * @ORM\OneToMany(mappedBy= "id_professionnel", targetEntity= RDV::class)
      */
     private $rdvs;
 
@@ -68,14 +68,14 @@ use Doctrine\ORM\Mapping as ORM;
     }
 
     /**
-     * @return Collection<int, Rdv>
+     * @return Collection<int, RDV>
      */
     public function getRdvs(): Collection
     {
         return $this->rdvs;
     }
 
-    public function addRdv(Rdv $rdv): self
+    public function addRdv(RDV $rdv): self
     {
         if (!$this->rdvs->contains($rdv)) {
             $this->rdvs[] = $rdv;
@@ -85,7 +85,7 @@ use Doctrine\ORM\Mapping as ORM;
         return $this;
     }
 
-    public function removeRdv(Rdv $rdv): self
+    public function removeRdv(RDV $rdv): self
     {
         if ($this->rdvs->removeElement($rdv)) {
             // set the owning side to null (unless already changed)
