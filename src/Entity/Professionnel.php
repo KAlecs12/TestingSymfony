@@ -7,21 +7,30 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ProfessionnelRepository::class)]
-class Professionnel
+/**
+ * @ORM\Entity(repositoryClass= ProfessionnelRepository::class)
+ */
+ class Professionnel
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type= "integer")
+     */
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    /** 
+     * @ORM\Column(type= "string", length= 255)
+     */
     private $Identite;
-
-    #[ORM\Column(type: 'dateinterval')]
+    /**
+     * @ORM\Column(type= "dateinterval")
+     */
     private $Duree_moyenne;
 
-    #[ORM\OneToMany(mappedBy: 'id_professionnel', targetEntity: Rdv::class)]
+    /**
+     * @ORM\OneToMany(mappedBy= "id_professionnel", targetEntity= Rdv::class)
+     */
     private $rdvs;
 
     public function __construct()

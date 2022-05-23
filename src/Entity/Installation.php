@@ -7,25 +7,37 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: InstallationRepository::class)]
+/**
+ * @ORM\Entity(repositoryClass= InstallationRepository::class)
+ */
 class Installation
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type= "integer")
+     */
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    /**
+     * @ORM\Column(type= "string", length= 255)
+     */
     private $Nom;
 
-    #[ORM\Column(type: 'integer')]
+    /**
+     * @ORM\Column(type= "integer")
+     */
     private $Nb_max_personnes;
 
-    #[ORM\Column(type: 'dateinterval')]
+    /**
+     * @ORM\Column(type= "dateinterval")
+     */
     private $Duree_utilisation_max;
 
-    #[ORM\OneToMany(mappedBy: 'id_installation', targetEntity: Rdv::class)]
-    private $rdvs;
+    /**
+     * @ORM\OneToMany(mappedBy= "id_installation", targetEntity= Rdv::class)
+     */
+     private $rdvs;
 
     public function __construct()
     {

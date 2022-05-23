@@ -5,27 +5,41 @@ namespace App\Entity;
 use App\Repository\RDVRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: RDVRepository::class)]
+/**
+ * @ORM\Entity(repositoryClass= RDVRepository::class)
+ */
 class RDV
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type= "integer")
+     */
     private $id;
 
-    #[ORM\Column(type: 'datetime')]
+    /**
+     * @ORM\Column(type= "datetime")
+     */
     private $date;
 
-    #[ORM\Column(type: 'string', length: 45)]
+    /**
+     * @ORM\Column(type= "string", length= 45)
+     */
     private $type;
 
-    #[ORM\Column(type: 'float')]
+    /**
+     * @ORM\Column(type= "float")
+     */
     private $tarification;
 
-    #[ORM\ManyToOne(targetEntity: Installation::class, inversedBy: 'rdvs')]
+    /**
+     * @ORM\ManyToOne(targetEntity= Installation::class, inversedBy= "rdvs")
+     */
     private $id_installation;
 
-    #[ORM\ManyToOne(targetEntity: Professionnel::class, inversedBy: 'rdvs')]
+    /**
+     * ORM\ManyToOne(targetEntity= Professionnel::class, inversedBy= "rdvs")
+     */
     private $id_professionnel;
 
     public function getId(): ?int

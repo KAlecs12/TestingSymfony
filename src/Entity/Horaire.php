@@ -4,16 +4,21 @@ namespace App\Entity;
 
 use App\Repository\HoraireRepository;
 use Doctrine\ORM\Mapping as ORM;
-
-#[ORM\Entity(repositoryClass: HoraireRepository::class)]
+/**
+ * @ORM\Entity(repositoryClass= HoraireRepository::class)
+ */
 class Horaire
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue]
+     * @ORM\Column(type= "integer")
+     */
     private $id;
 
-    #[ORM\Column(type: 'dateinterval')]
+    /**
+     * @ORM\Column(type= "dateinterval")
+     */
     private $Horaire;
 
     public function getId(): ?int
