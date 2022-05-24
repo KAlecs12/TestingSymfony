@@ -1,7 +1,20 @@
+html,
+body {
+    margin: 0;
+    background-color: #120e01;
+}
+.mainbody{
+    width: 100%;
+}
 .profile-container {
     display: flex;
+    vertical-align: middle;
     flex-direction: column;
+    background-color: #120e01;
+    margin-left: 250px;
+}
 
+.wood{
     background-image: url("../../public/images/wood.jpg");
 }
 
@@ -10,7 +23,7 @@
     width: 70%;
     height: 220px;
     margin-top: 20px;
-    background-image: url("../../public/images/entrance.jpg");
+
     background-size: contain;
 }
 
@@ -37,6 +50,7 @@
     display: flex;
     flex-direction: column;
     margin: auto;
+    height: 100%;
     align-items: center;
     /*background-color: #4b432a;*/
     background-color: rgba(55, 45, 29, 0.9);
@@ -106,10 +120,7 @@
     letter-spacing: 2px;
 
 }
-.profile-form ul {
-    justify-content: center;
 
-}
 .profile-form input {
     display: block;
     border-color: #aec676;
@@ -216,6 +227,7 @@ ul li a:hover {
     color: #aec676;
 }
 
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -253,10 +265,13 @@ ul li a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 15px;
+    padding-bottom: 30px;
     background-color: rgba(18, 14, 1, 0.9);
 }
-
+.entrance{
+    margin: auto;
+    background-image: url("../../public/images/entrance.jpg");
+}
 .left-side {
     margin: auto;
     width: 40%;
@@ -359,4 +374,40 @@ input#add_file_form_imageFilename{
     /* To center horizontally */
     margin: 0 auto;
     pointer-events: all;
+}
+
+/* SIDE BAR */
+
+.sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    /*background: linear-gradient(rgba(18, 14, 1, 0), rgba(18, 14, 1, 1));*/
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 5px;
+}
+
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #000000;
+    display: block;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
 }

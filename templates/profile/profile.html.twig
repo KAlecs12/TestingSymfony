@@ -7,164 +7,166 @@
 {# Ici vous mettez vos codes HTML et balises Twig au besoin #}
 {% block body %}
 
-    <div class="profile-container">
-
-        <div class="profile-form">
-            <hr>
-            <div class="container bootstrap snippet">
-                <div class="row">
-                    <div class="col-sm-3"><!--left col-->
 
 
-                        <div class="text-center">
-                            <h2>{{ app.user.firstName }}</h2>
-                            <p>{{ app.user.lastName }}</p>
-                            <p>{{ app.user.email }}</p>
-                            <p>13100</p>
-                            <p>Aix-en-Provence</p>
+        <div class="profile-container">
+            <div class="profile-form">
+                <hr>
+
+                <div class="container bootstrap snippet">
+                    <div class="row">
+                        <div class="col-sm-3"><!--left col-->
+
+
+                            <div class="text-center">
+                                <h2>{{ app.user.firstName }}</h2>
+                                <p>{{ app.user.lastName }}</p>
+                                <p>{{ app.user.email }}</p>
+                                <p>13100</p>
+                                <p>Aix-en-Provence</p>
+                            </div>
+                            <br>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Informations <i class="fa fa-link fa-1x"></i></div>
+                                <li class="list-group-item text-right"><span class="pull-left"><strong>Rendez-vous</strong></span> 125</li>
+                                <li class="list-group-item text-right"><span class="pull-left"><strong>Messages</strong></span> 13</li>
+                                <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
+                                <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
+                            </div>
+
+
+
                         </div>
-                        <br>
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Informations <i class="fa fa-link fa-1x"></i></div>
-                            <li class="list-group-item text-right"><span class="pull-left"><strong>Rendez-vous</strong></span> 125</li>
-                            <li class="list-group-item text-right"><span class="pull-left"><strong>Messages</strong></span> 13</li>
-                            <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
-                            <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
-                        </div>
+                        <!-- MENU -->
 
+                        <div class="col-sm-9">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#home">Accueil</a></li>
+                                <li><a data-toggle="tab" href="#messages">Facturations</a></li>
+                                <li><a data-toggle="tab" href="#settings">Parametres</a></li>
 
 
-                    </div>
+                            </ul>
 
-                    <!-- MENU -->
+                            <!-- MENU 1 -->
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="home">
+                                    <div class="background">
 
-                    <div class="col-sm-9">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#home">Accueil</a></li>
-                            <li><a data-toggle="tab" href="#messages">Facturations</a></li>
-                            <li><a data-toggle="tab" href="#settings">Parametres</a></li>
-
-
-                        </ul>
-
-                        <!-- MENU 1 -->
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="home">
-                                <div class="background">
+                                    </div>
 
                                 </div>
 
-                            </div>
+                                <!-- MENU 2 -->
 
-                            <!-- MENU 2 -->
+                                <div class="tab-pane" id="messages">
+                                    <br>
+                                    {{ form_start(form) }}
+                                    {{ form_row(form.titre) }}
+                                    <br>
+                                    <button type="submit" class="btn btn-primary" formtarget="_blank">Ouvrir</button>
+                                    {{ form_end(form) }}
+                                </div>
 
-                            <div class="tab-pane" id="messages">
-                                <br>
-                                {{ form_start(form) }}
-                                {{ form_row(form.titre) }}
-                                <br>
-                                <button type="submit" class="btn btn-primary" formtarget="_blank">Ouvrir</button>
-                                {{ form_end(form) }}
-                            </div>
+                                <!-- MENU 3 -->
 
-                            <!-- MENU 3 -->
-
-                            <div class="tab-pane" id="settings">
+                                <div class="tab-pane" id="settings">
 
 
-                                <hr>
-                                <form class="form" action="##" method="post" id="registrationForm">
-                                    <div class="form-group">
+                                    <hr>
+                                    <form class="form" action="##" method="post" id="registrationForm">
+                                        <div class="form-group">
 
-                                        <div class="col-xs-6">
-                                            <label for="first_name"><h4>Prenom</h4></label>
-                                            <input class="form-control" name="first_name" id="first_name" placeholder="{{ app.user.firstName }}" title="enter your first name if any.">
+                                            <div class="col-xs-6">
+                                                <label for="first_name"><h4>Prenom</h4></label>
+                                                <input class="form-control" name="first_name" id="first_name" placeholder="{{ app.user.firstName }}" title="enter your first name if any.">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
+                                        <div class="form-group">
 
-                                        <div class="col-xs-6">
-                                            <label for="last_name"><h4>Nom de famille</h4></label>
-                                            <input  class="form-control" name="last_name" id="last_name" placeholder="{{ app.user.lastName }}" title="enter your last name if any.">
+                                            <div class="col-xs-6">
+                                                <label for="last_name"><h4>Nom de famille</h4></label>
+                                                <input  class="form-control" name="last_name" id="last_name" placeholder="{{ app.user.lastName }}" title="enter your last name if any.">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group">
+                                        <div class="form-group">
 
-                                        <div class="col-xs-6">
-                                            <label for="phone"><h4>Telephone</h4></label>
-                                            <input class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                                            <div class="col-xs-6">
+                                                <label for="phone"><h4>Telephone</h4></label>
+                                                <input class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
+                                        <div class="form-group">
 
-                                        <div class="col-xs-6">
-                                            <label for="location"><h4>Adresse</h4></label>
-                                            <input  class="form-control" id="location" placeholder="somewhere" title="enter a location">
+                                            <div class="col-xs-6">
+                                                <label for="location"><h4>Adresse</h4></label>
+                                                <input  class="form-control" id="location" placeholder="somewhere" title="enter a location">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
+                                        <div class="form-group">
 
-                                        <div class="col-xs-6">
-                                            <label for="email"><h4>Email</h4></label>
-                                            <input type="email" class="form-control" name="email" id="email2" placeholder="{{ app.user.email }}" title="enter your email.">
+                                            <div class="col-xs-6">
+                                                <label for="email"><h4>Email</h4></label>
+                                                <input type="email" class="form-control" name="email" id="email2" placeholder="{{ app.user.email }}" title="enter your email.">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group">
+                                        <div class="form-group">
 
-                                        <div class="col-xs-6">
-                                            <label for="password"><h4>Mot de passe</h4></label>
-                                            <input type="password" class="form-control" name="password" id="password" title="enter your password.">
+                                            <div class="col-xs-6">
+                                                <label for="password"><h4>Mot de passe</h4></label>
+                                                <input type="password" class="form-control" name="password" id="password" title="enter your password.">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <div class="col-xs-12 save">
-                                            <br>
-                                            <button class="btn btn-lg btn-success pull-right" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Sauvegarder</button>
+                                        <div class="form-group">
+                                            <div class="col-xs-12 save">
+                                                <br>
+                                                <button class="btn btn-lg btn-success pull-right" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Sauvegarder</button>
 
+                                            </div>
                                         </div>
-                                    </div>
 
-                                </form>
+                                    </form>
 
-                            </div>
+                                </div>
 
-                        </div><!--/tab-pane-->
-                    </div><!--/tab-content-->
+                            </div><!--/tab-pane-->
+                        </div><!--/tab-content-->
 
-                </div><!--/col-9-->
-            </div><!--/row-->
-
-        </div>
-    </div>
-
-    <div class="footer-container">
-        <div class="left-side">
-            <img id="logoimg" src="{{ asset('images/logo.png')}}" alt="">
-            <h2>Suivez nous !</h2>
-            <hr>
-            <div class="icons-box">
-                <svg class="svg-icon" viewBox="0 0 20 20">
-                    <path fill="#fff" d="M10,0.5c-5.247,0-9.5,4.253-9.5,9.5c0,5.247,4.253,9.5,9.5,9.5c5.247,0,9.5-4.253,9.5-9.5C19.5,4.753,15.247,0.5,10,0.5 M10,18.637c-4.77,0-8.636-3.867-8.636-8.637S5.23,1.364,10,1.364S18.637,5.23,18.637,10S14.77,18.637,10,18.637 M10.858,7.949c0-0.349,0.036-0.536,0.573-0.536h0.719v-1.3H11c-1.38,0-1.866,0.65-1.866,1.743v0.845h-0.86V10h0.86v3.887h1.723V10h1.149l0.152-1.299h-1.302L10.858,7.949z"></path>
-                </svg>
-                <svg class="svg-icon" viewBox="0 0 20 20">
-                    <path fill="#fff" d="M9.969,0.594c-5.195,0-9.406,4.211-9.406,9.406c0,5.195,4.211,9.406,9.406,9.406c5.195,0,9.406-4.211,9.406-9.406C19.375,4.805,15.164,0.594,9.969,0.594 M9.969,18.552c-4.723,0-8.551-3.829-8.551-8.552s3.829-8.551,8.551-8.551S18.521,5.277,18.521,10S14.691,18.552,9.969,18.552 M12.534,5.724H7.403c-0.944,0-1.71,0.766-1.71,1.71v5.131c0,0.944,0.766,1.71,1.71,1.71h5.131c0.944,0,1.71-0.766,1.71-1.71V7.435C14.244,6.49,13.479,5.724,12.534,5.724M11.679,7.007h1.283V8.29h-1.283V7.007z M9.969,8.29c0.944,0,1.71,0.766,1.71,1.71s-0.766,1.71-1.71,1.71s-1.71-0.766-1.71-1.71S9.024,8.29,9.969,8.29 M13.39,12.565c0,0.472-0.384,0.854-0.855,0.854H7.403c-0.472,0-0.855-0.383-0.855-0.854V9.573h0.898C7.423,9.712,7.403,9.854,7.403,10c0,1.417,1.149,2.565,2.565,2.565c1.416,0,2.565-1.148,2.565-2.565c0-0.146-0.02-0.288-0.043-0.427h0.898V12.565z"></path>
-                </svg>
+                    </div><!--/col-9-->
+                </div><!--/row-->
             </div>
         </div>
 
-        <div class="right-side">
-            <h2>ECURIES DE PERSÉVÈRE</h2>
-            <p>Campagne Giotte et Paradis <br>
-                13980 ALLEINS
-            </p>
-            <hr>
-            <p>ecuriesdepersevere@hotmail.fr</p>
-            <p>06.65.55.87.08</p>
-        </div>
-    </div>
+            <div class="entrance">
+                <div class="footer-container">
+                    <div class="left-side">
+                        <img id="logoimg" src="{{ asset('images/logo.png')}}" alt="">
+                        <h2>Suivez nous !</h2>
+                        <hr>
+                        <div class="icons-box">
+                            <svg class="svg-icon" viewBox="0 0 20 20">
+                                <path fill="#fff" d="M10,0.5c-5.247,0-9.5,4.253-9.5,9.5c0,5.247,4.253,9.5,9.5,9.5c5.247,0,9.5-4.253,9.5-9.5C19.5,4.753,15.247,0.5,10,0.5 M10,18.637c-4.77,0-8.636-3.867-8.636-8.637S5.23,1.364,10,1.364S18.637,5.23,18.637,10S14.77,18.637,10,18.637 M10.858,7.949c0-0.349,0.036-0.536,0.573-0.536h0.719v-1.3H11c-1.38,0-1.866,0.65-1.866,1.743v0.845h-0.86V10h0.86v3.887h1.723V10h1.149l0.152-1.299h-1.302L10.858,7.949z"></path>
+                            </svg>
+                            <svg class="svg-icon" viewBox="0 0 20 20">
+                                <path fill="#fff" d="M9.969,0.594c-5.195,0-9.406,4.211-9.406,9.406c0,5.195,4.211,9.406,9.406,9.406c5.195,0,9.406-4.211,9.406-9.406C19.375,4.805,15.164,0.594,9.969,0.594 M9.969,18.552c-4.723,0-8.551-3.829-8.551-8.552s3.829-8.551,8.551-8.551S18.521,5.277,18.521,10S14.691,18.552,9.969,18.552 M12.534,5.724H7.403c-0.944,0-1.71,0.766-1.71,1.71v5.131c0,0.944,0.766,1.71,1.71,1.71h5.131c0.944,0,1.71-0.766,1.71-1.71V7.435C14.244,6.49,13.479,5.724,12.534,5.724M11.679,7.007h1.283V8.29h-1.283V7.007z M9.969,8.29c0.944,0,1.71,0.766,1.71,1.71s-0.766,1.71-1.71,1.71s-1.71-0.766-1.71-1.71S9.024,8.29,9.969,8.29 M13.39,12.565c0,0.472-0.384,0.854-0.855,0.854H7.403c-0.472,0-0.855-0.383-0.855-0.854V9.573h0.898C7.423,9.712,7.403,9.854,7.403,10c0,1.417,1.149,2.565,2.565,2.565c1.416,0,2.565-1.148,2.565-2.565c0-0.146-0.02-0.288-0.043-0.427h0.898V12.565z"></path>
+                            </svg>
+                        </div>
+                    </div>
 
+                    <div class="right-side">
+                        <h2>ECURIES DE PERSÉVÈRE</h2>
+                        <p>Campagne Giotte et Paradis <br>
+                            13980 ALLEINS
+                        </p>
+                        <hr>
+                        <p>ecuriesdepersevere@hotmail.fr</p>
+                        <p>06.65.55.87.08</p>
+                    </div>
+                </div>
+            </div>
 {% endblock %}

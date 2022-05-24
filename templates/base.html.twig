@@ -24,26 +24,52 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-    <div class="header-container">
-        <hr class="hrbar">
-        <div class="logo">
-            <img id="logoimg" src="{{ asset('images/logo.png')}}" alt="">
-        </div>
-        <ul class="headernav">
-            <li><a class="white" href="/profile">PROFILS</a></li>
-            <li><a class="white" href="/rdv">PRENDRE RENDEZ-VOUS</a></li>
-            <li><a class="white" href="/equipe">CONTACT</a></li>
+{#    <div class="header-container">#}
+{#        <hr class="hrbar">#}
+{#        <div class="logo">#}
+{#            <img id="logoimg" src="{{ asset('images/logo.png')}}" alt="">#}
+{#        </div>#}
+{#        <ul class="headernav">#}
+{#            <li><a class="white" href="/profile">PROFILS</a></li>#}
+{#            <li><a class="white" href="/rdv">PRENDRE RENDEZ-VOUS</a></li>#}
+{#            <li><a class="white" href="/equipe">CONTACT</a></li>#}
+{#            {% if is_granted('ROLE_ADMIN') %}#}
+{#                <li>#}
+{#                    <a class="nav-link white" href="{{ path('app_admin') }}">Admin</a>#}
+{#                </li>#}
+{#            {% endif %}#}
+{#            <li>#}
+{#                <a class="dropdown-item" href="{{ path('app_logout') }}">Log Out</a>#}
+{#            </li>#}
+
+{#        </ul>#}
+{#        <hr class="hrbar">#}
+{#    </div>#}
+    <div id="mySidenav" class="sidenav wood" style="display: flex;flex-direction: column;justify-content: space-between;">
+        <div>
+            <div class="logo" style="margin-left: 50px">
+                <img id="logoimg" src="{{ asset('images/logo.png')}}" alt="">
+            </div>
+
+            <li><a class="white" href="/profile">Informations</a></li>
+
+            <li><a class="white" href="/rdv">Prendre Rendez-vous</a></li>
+
             {% if is_granted('ROLE_ADMIN') %}
                 <li>
-                    <a class="nav-link white" href="{{ path('app_admin') }}">Admin</a>
+                    <a class="nav-link white" href="{{ path('app_admin') }}">Pannel Admin</a>
                 </li>
             {% endif %}
-            <li>
-                <a class="dropdown-item" href="{{ path('app_logout') }}">Log Out</a>
-            </li>
 
-        </ul>
-        <hr class="hrbar">
+            <li>
+                <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnection</a>
+            </li>
+        </div>
+        <div>
+            <li>
+                <a class="dropdown-item" href="{{ path('app_profile') }}" style="margin-bottom: 20%">Parametres</a>
+            </li>
+        </div>
     </div>
         {% block body %}{% endblock %}
     </body>

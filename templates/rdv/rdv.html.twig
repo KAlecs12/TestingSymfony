@@ -37,13 +37,13 @@
     <div class="profile-container">
         <div class="calendar-form">
             <ul>
-                <li><a href="/profile">Retour</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li>
+                        <a class="nav-link white" href="{{ path('app_calendar_index') }}">Admin</a>
+                    </li>
+                {% endif %}
             </ul>
-            {% if is_granted('ROLE_ADMIN') %}
-                <li>
-                    <a class="nav-link white" href="{{ path('app_calendar_index') }}">Admin</a>
-                </li>
-            {% endif %}
+
             <div id="calendrier">
         </div>
     </div>
