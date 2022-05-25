@@ -8,12 +8,11 @@ body {
 }
 .profile-container {
     display: flex;
-    vertical-align: middle;
     flex-direction: column;
     background-color: #120e01;
     margin-left: 250px;
-    margin-bottom: 5%;
-
+    height: 100vh;
+    justify-content: center;
 }
 
 .wood{
@@ -52,7 +51,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: auto;
-    height: 100%;
+    height: 80%;
     align-items: center;
     /*background-color: #4b432a;*/
     background-color: rgba(55, 45, 29, 0.9);
