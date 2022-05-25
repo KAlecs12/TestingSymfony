@@ -45,6 +45,7 @@
 {#        </ul>#}
 {#        <hr class="hrbar">#}
 {#    </div>#}
+
     <div id="mySidenav" class="sidenav wood" style="display: flex;flex-direction: column;justify-content: space-between;">
         <div>
             <div class="logo" style="margin-left: 50px">
@@ -61,6 +62,8 @@
                 </li>
             {% endif %}
 
+            <li><a class="white" href="/contact">Contact</a></li>
+
             <li>
                 <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnection</a>
             </li>
@@ -71,6 +74,7 @@
             </li>
         </div>
     </div>
+
         {% block body %}{% endblock %}
     </body>
 </html>

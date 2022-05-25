@@ -21,7 +21,7 @@ class CalendarController extends AbstractController
             ->getRepository(Calendar::class)
             ->findAll();
 
-        return $this->render('calendar/index.html.twig', [
+        return $this->render('calendar/contact.html.twig', [
             'calendars' => $calendars,
         ]);
     }

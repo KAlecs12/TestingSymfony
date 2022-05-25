@@ -22,7 +22,7 @@
 
                        {{ form_row(form.id) }}
                         <br>
-                        <button type="submit" class="btn btn-primary">Accepter</button>
+                        <button type="submit" class="btn btn-primary">Accepter ✅</button>
 
                     </div>
                     {{ form_end(form) }}
@@ -35,7 +35,6 @@
     </div>
 
     <div class="profile-container">
-        <div class="calendar-form">
             <ul>
                 {% if is_granted('ROLE_ADMIN') %}
                     <li>
@@ -44,10 +43,7 @@
                 {% endif %}
             </ul>
 
-            <div id="calendrier">
-        </div>
-    </div>
-
+            <div id="calendrier"></div>
     </div>
 {% endblock %}
 
@@ -79,6 +75,7 @@
                 $('#calendarModal').modal("show");
             },
         })
+
         calendar.render()
     }
 </script>
