@@ -20,7 +20,7 @@ class AddFileFormType extends AbstractType
     {
         $builder
             ->add('firstName', EntityType::class, [
-                'label' => 'Nom : ',
+                'label' => 'Selection du client : ',
                 'mapped' => false,
                 'class' => User::class,
                 'choice_label' => 'firstName'

@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -58,6 +58,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\OneToMany(targetEntity=Calendar::class, mappedBy="idUser")
      */
     private $calendars;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Cheval::class, mappedBy="idUser")
+     */
+    private $cheval;
 
     public function __construct()
     {
@@ -243,6 +248,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($calendar->getIdUser() === $this) {
                 $calendar->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+    /**
+     * @return Collection<int, Cheval>
+     */
+    public function getCheval(): Collection
+    {
+        return $this->cheval;
+    }
+
+    public function addCheval(Cheval $chevals): self
+    {
+        if (!$this->cheval->contains($chevals)) {
+            $this->cheval[] = $chevals;
+            $chevals->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCheval(Cheval $chevals): self
+    {
+        if ($this->calendars->removeElement($chevals)) {
+            // set the owning side to null (unless already changed)
+            if ($chevals->getIdUser() === $this) {
+                $chevals->setIdUser(null);
             }
         }
 

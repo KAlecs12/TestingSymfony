@@ -14,18 +14,37 @@
         <div class="vertical-alignment-helper">
             <div class="modal-dialog vertical-align-center">
                 <div class="modal-content ">
-                    {{ form_start(form) }}
+                    {{ form_start(form2) }}
                     <div class="modal-header">
                         <h4 id="modalTitle" class="modal-title"></h4>
                     </div>
                     <div id="modalBody" class="modal-body">
-
-                       {{ form_row(form.id) }}
+                    </div>    {{ form_row(form2.id) }}
                         <br>
                         <button type="submit" class="btn btn-primary">Accepter ✅</button>
 
                     </div>
+                    {{ form_end(form2) }}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modelWindow" class="modal fade">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 id="modalTitle" class="modal-title">Ajout d'un événement</h4>
+                    </div>
+                <div style="display: flex; justify-content: center; margin: 15px 0">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button class="btn">{{ button_label|default('Save') }}</button>
                     {{ form_end(form) }}
+                </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
@@ -35,17 +54,22 @@
     </div>
 
     <div class="profile-container">
-            <ul>
+            <ul style="margin-top: 20px">
                 {% if is_granted('ROLE_ADMIN') %}
-                    <li>
-                        <a class="nav-link white" href="{{ path('app_calendar_index') }}">Admin</a>
+                    <li style="margin-left: 15px">
+                        <a style="background-color: #efefef; border-radius: 5px; color: #120e01;font-weight: 400;" class="nav-link white" href="{{ path('app_calendar_index') }}">Détails Admin</a>
+                    </li>
+                    <li style="margin-left: 15px">
+                    <a style="background-color: #efefef; border-radius: 5px; color: #120e01;font-weight: 400;" data-toggle="modal" data-target="#modelWindow" class="nav-link white" href="#">Ajouter un Rdv</a>
                     </li>
                 {% endif %}
+
             </ul>
 
             <div id="calendrier"></div>
     </div>
 {% endblock %}
+
 
 {% block javascripts %}
 
@@ -58,14 +82,15 @@
             initialView: 'timeGridWeek',
             locale: 'Fr',
             timeZone: 'Europe/Paris',
-            slotMinTime: "09:00",
-            slotMaxTime: "19:00",
-            height: "auto",
+            slotMinTime: "06:00",
+            slotMaxTime: "20:00",
+            height: "69%",
             headerToolbar: {
                 start: 'timeGridWeek dayGridMonth',
                 center: 'title',
                 end: 'today prev,next'
             },
+
             events: {{ data | raw }},
             allDaySlot: false,
             eventClick:  function(event, jsEvent, view) {
@@ -78,5 +103,6 @@
 
         calendar.render()
     }
+
 </script>
 {% endblock %}

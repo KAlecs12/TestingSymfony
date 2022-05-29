@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Calendar;
 use App\Entity\Facture;
 use App\Form\OpenPdfType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,38 +16,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileController extends AbstractController
 {
 
-    #[Route('/profile', name: 'app_profile')]
-    public function index(Request $request, KernelInterface $kernelInterface): Response
+    #[Route('/profil', name: 'app_profile')]
+    public function index(EntityManagerInterface $entityManager, Request $request, KernelInterface $kernelInterface): Response
     {
-        $facturation = new Facture();
-        $form = $this->createForm(OpenPdfType::class, $facturation);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()){
-
-
-            $facture = $form->get('titre')->getData();
-
-            $facturation = $facture;
-
-            $content = $facturation->getContent();
-
-            $projectRoot = $kernelInterface->getProjectDir();
-            return $this->file( $projectRoot.$content, null, ResponseHeaderBag::DISPOSITION_INLINE);
-        }
+        $factures = $entityManager
+            ->getRepository(Facture::class)
+            ->findBy(array('idUser' => $this->getUser()->getId()));
 
         return $this->renderForm('profile/profile.html.twig', [
             'controller_name' => 'ProfileController',
-            'form' => $form,
+            'factures' => $factures
         ]);
     }
-//    #[Route('/pdf/', name: 'download_file')]
-//    public function pdfAction(KernelInterface $kernelInterface): Response
-//    {
-//
-//
-//        $projectRoot = $kernelInterface->getProjectDir();
-//        return $this->file( $projectRoot.$content, null, ResponseHeaderBag::DISPOSITION_INLINE);
-//
-//    }
+
 }

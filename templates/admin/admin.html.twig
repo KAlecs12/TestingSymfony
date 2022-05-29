@@ -17,7 +17,7 @@
             <div class="profile-form">
                 <div class="col-sm-9">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#home">Accueil</a></li>
+                        <li class="active"><a data-toggle="tab" href="#linkcheval">Lier un Cheval</a></li>
                         <li><a data-toggle="tab" href="#messages">Facturations</a></li>
                         <li><a data-toggle="tab" href="#settings">Ajouter Client</a></li>
 
@@ -26,15 +26,27 @@
 
                     <!-- MENU 1 -->
                     <div class="tab-content">
-                        <div class="tab-pane active" id="home">
+                        <div class="tab-pane active" id="linkcheval">
                             <div class="container">
                                 <div class="row">
-
+                                    <h1 style="color: white">Lier un Cheval a un client</h1>
+                                    {{ form_start(form4) }}
+                                    {{ form_row(form4.nom) }}
+                                    {{ form_row(form4.firstName) }}
+                                    <button type="submit" class="btn">Register</button>
+                                    {{ form_end(form4) }}
+                                    <h1 style="color: white">Ajouter un Cheval</h1>
+                                    {{ form_start(form3) }}
+                                    {{ form_row(form3.nom) }}
+                                    {{ form_row(form3.box) }}
+                                    <button type="submit" class="btn">Register</button>
+                                    {{ form_end(form3) }}
                                 </div>
                             </div>
                         </div>
 
                         <!-- MENU 2 -->
+                        <!-- MENU 3 -->
 
                         <div class="tab-pane" id="messages">
                             <div class="container">
@@ -51,12 +63,11 @@
                                 <button type="submit" class="btn btn-primary">Upload!</button>
                                 {{ form_end(form) }}
 
-                                <h1><a href="{{ path('app_profile') }}">Retour !</a></h1>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- MENU 3 -->
+                        <!-- MENU 4 -->
 
                         <div class="tab-pane" id="settings">
                             <div class="container">
@@ -70,7 +81,6 @@
                                         {{ form_row(form2.email) }}
                                         <button type="submit" class="btn">Register</button>
                                         {{ form_end(form2) }}
-                                        <h2><a href="{{ path('app_admin') }}">Go back</a></h2>
                                     </div>
                                 </div>
                             </div>

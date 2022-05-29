@@ -50,13 +50,11 @@ body {
 .profile-form {
     display: flex;
     flex-direction: column;
-    margin: auto;
     height: 80%;
     align-items: center;
     /*background-color: #4b432a;*/
-    background-color: rgba(55, 45, 29, 0.9);
-    margin-top: 40px;
-    margin-bottom: 40px;
+    background-color: #503d27;
+    margin: 3% 2%;
     border-radius: 5px;
     box-shadow: 0 2px 12px 2px rgba(0, 0, 0, 1);
     border-color: rgba(18, 14, 1, 1) rgba(18, 14, 1, 1) rgba(18, 14, 1, 1) rgba(18, 14, 1, 1);
@@ -412,4 +410,46 @@ input#add_file_form_imageFilename{
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+    background-color: rgba(55, 45, 29, 0.9);
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 5px;
+    box-shadow: 0 2px 12px 2px rgba(0, 0, 0, 1);
+    border-color: rgba(18, 14, 1, 1) rgba(18, 14, 1, 1) rgba(18, 14, 1, 1) rgba(18, 14, 1, 1);
+    border-width: 2px 2px 2px 2px;
+    border-style: solid solid solid solid;
+    height: auto;
+    width: 65%;
+
+}
+
+textarea {
+    vertical-align: top;
+    min-width : 300px;
+    min-height : 200px;
+    max-width : 300px;
+    max-height : 200px;}
+
+#calendar_title{
+    margin-bottom: 20px ;
+}
+
+#calendar_description{
+    margin-bottom: 20px ;
+}
+#calendar_end{
+    margin-bottom: 20px ;
+}
+#calendar_start{
+    margin-bottom: 20px ;
+}
+#calendar{
+    margin-bottom: 20px ;
 }

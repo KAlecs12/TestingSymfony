@@ -3,9 +3,12 @@
 {% block title %}Calendar{% endblock %}
 
 {% block body %}
-    <h1>Calendar</h1>
+<div class="profile-container">
 
-    <table class="table">
+    <div class="edit-form">
+    <h1 style="color: white">Calendar</h1>
+
+    <table class="table" style="color: white">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -27,24 +30,20 @@
                 <th>Description</th>
                 <td>{{ calendar.description }}</td>
             </tr>
-            <tr>
-                <th>Background_color</th>
-                <td>{{ calendar.backgroundColor }}</td>
-            </tr>
-            <tr>
-                <th>Border_color</th>
-                <td>{{ calendar.borderColor }}</td>
-            </tr>
-            <tr>
-                <th>Text_color</th>
-                <td>{{ calendar.textColor }}</td>
-            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_calendar_index') }}">back to list</a>
-
-    <a href="{{ path('app_calendar_edit', {'id': calendar.id}) }}">edit</a>
-
-    {{ include('calendar/_delete_form.html.twig') }}
+        <div style="display: flex;align-items: center;">
+            <ul>
+            <li style="margin-right: 10px">
+            <a style="background-color: #efefef; border-radius: 5px; color: #120e01;font-weight: 400;" class="nav-link white" href="{{ path('app_calendar_index') }}">Retour a l'index</a>
+            </li>
+            <li style="margin-right: 10px">
+            <a style="background-color: #efefef; border-radius: 5px; color: #120e01;font-weight: 400;" class="nav-link white" href="{{ path('app_calendar_edit', {'id': calendar.id}) }}">Modifier</a>
+            </li>
+            </ul>
+            {{ include('calendar/_delete_form.html.twig') }}
+        </div>
+    </div>
+</div>
 {% endblock %}

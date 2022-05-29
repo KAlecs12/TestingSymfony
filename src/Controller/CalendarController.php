@@ -26,25 +26,6 @@ class CalendarController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_calendar_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $calendar = new Calendar();
-        $form = $this->createForm(CalendarType::class, $calendar);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($calendar);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_calendar_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('calendar/new.html.twig', [
-            'calendar' => $calendar,
-            'form' => $form,
-        ]);
-    }
 
     #[Route('/{id}', name: 'app_calendar_show', methods: ['GET'])]
     public function show(Calendar $calendar): Response

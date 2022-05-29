@@ -3,12 +3,18 @@
 namespace App\Entity;
 
 use App\Repository\FactureRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
 *@ORM\Entity(repositoryClass=FactureRepository::class)
 */
-class Facture
+class Facture extends AbstractController
 {
     /**
     * @ORM\Id
@@ -71,4 +77,5 @@ class Facture
 
         return $this;
     }
+
 }

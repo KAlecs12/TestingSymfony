@@ -3,17 +3,18 @@
 {% block title %}Calendar index{% endblock %}
 
 {% block body %}
+
     <div class="profile-container">
 
-        <div class="dashboard-form">
-            <div>
+        <div class="edit-form">
+
                 <ul>
-                    <li><a href="/rdv">Retour</a></li>
-                    <h1>Calendar index</h1>
+                    <li style="margin-left: -400px"><a href="/rdv">Retour</a></li>
+                    <h1 style="color: white; margin-left: 300px">Calendar index</h1>
                 </ul>
 
-            </div>
-        <table class="table">
+
+        <table class="table" style="color: white">
             <thead>
                 <tr>
                     <th>Title</th>
@@ -44,7 +45,6 @@
             {% endfor %}
             </tbody>
         </table>
-    <a href="{{ path('app_calendar_new') }}">Create new</a>
         </div>
     </div>
 {% endblock %}

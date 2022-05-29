@@ -14,23 +14,13 @@
                 <br>
                 <div class="container bootstrap snippet">
                     <div class="row">
-                        <div class="col-sm-3"><!--left col-->
-
-                            <div class="text-center">
-                                <h2>{{ app.user.firstName }}</h2>
-                                <p>{{ app.user.lastName }}</p>
-                                <p>{{ app.user.email }}</p>
-                                <p>13100</p>
-                                <p>Aix-en-Provence</p>
-                            </div>
-                            <br>
+                        <div class="col-sm-3" style="margin-left: -150px;">
 
                             <div class="panel panel-default">
-                                <div class="panel-heading">Informations <i class="fa fa-link fa-1x"></i></div>
-                                <li class="list-group-item text-right"><span class="pull-left"><strong>Rendez-vous</strong></span> 125</li>
-                                <li class="list-group-item text-right"><span class="pull-left"><strong>Messages</strong></span> 13</li>
-                                <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
-                                <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
+                                <div style="color: #aec676 ; font-size: 2em; background-color: #EEE6D8" class="panel-heading">Informations <i class="fa fa-link fa-1x"></i></div>
+                                <li class="list-group-item">{{ app.user.firstName }}</li>
+                                <li class="list-group-item ">{{ app.user.lastName }}</li>
+                                <li class="list-group-item ">{{ app.user.email }}</li>
                             </div>
 
 
@@ -41,16 +31,15 @@
 
                         <div class="col-sm-9">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#home">Accueil</a></li>
+                                <li class="active" ><a data-toggle="tab" href="#cheval">Mes chevaux</a></li>
                                 <li><a data-toggle="tab" href="#messages">Facturations</a></li>
                                 <li><a data-toggle="tab" href="#settings">Parametres</a></li>
-
 
                             </ul>
 
                             <!-- MENU 1 -->
                             <div class="tab-content">
-                                <div class="tab-pane active" id="home">
+                                <div class="tab-pane active" id="cheval">
                                     <div class="background">
 
                                     </div>
@@ -59,14 +48,18 @@
 
                                 <!-- MENU 2 -->
 
-                                <div class="tab-pane" id="messages">
+                                <div  class="tab-pane" id="messages">
                                     <br>
-                                    {{ form_start(form) }}
-                                    {{ form_row(form.titre) }}
-                                    <br>
-                                    <button type="submit" class="btn btn-primary" formtarget="_blank">Ouvrir</button>
-                                    {{ form_end(form) }}
+                                    <div style="width: 900px;display: grid;grid-template-columns: 1fr 2fr 4fr 6fr;grid-row-gap: 15px;grid-column-gap: 15px;">
+                                        {% for facture in factures %}
+                                                    <a class="panel panel-heading" style="color: black; width: 230px; background-color: #EEE6D8" href="{{ path('app_facture', {'id' : facture.id}) }}"  target="_blank">
+                                                        Facturation du {{ facture.titre }}
+                                                    </a>
+
+                                        {% endfor %}
+                                    </div>
                                 </div>
+
 
                                 <!-- MENU 3 -->
 
@@ -132,11 +125,11 @@
 
                                 </div>
 
-                            </div><!--/tab-pane-->
-                        </div><!--/tab-content-->
+                            </div>
+                        </div>
 
-                    </div><!--/col-9-->
-                </div><!--/row-->
+                    </div>
+                </div>
             </div>
         </div>
 
