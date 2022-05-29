@@ -41,7 +41,15 @@
                             <div class="tab-content">
                                 <div class="tab-pane active" id="cheval">
                                     <div class="background">
+                                        <div style="width: 900px;display: grid;grid-template-columns: 1fr 2fr 4fr 6fr;grid-row-gap: 15px;grid-column-gap: 15px;">
+                                            {% for cheval in chevals %}
+                                                <div class="panel panel-heading" style="color: black; width: 230px; background-color: #EEE6D8; margin-top: 30px">
+                                                    <li>Cheval : {{ cheval.nom }}</li>
+                                                    <li>Box : {{ cheval.box }}</li>
+                                                </div>
 
+                                            {% endfor %}
+                                        </div>
                                     </div>
 
                                 </div>

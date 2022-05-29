@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Calendar;
+use App\Entity\Cheval;
 use App\Entity\Facture;
 use App\Form\OpenPdfType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,9 +24,15 @@ class ProfileController extends AbstractController
             ->getRepository(Facture::class)
             ->findBy(array('idUser' => $this->getUser()->getId()));
 
+        $cheval = $entityManager
+            ->getRepository(Cheval::class)
+            ->findBy(array('idUser' => $this->getUser()->getId()));
+
+
         return $this->renderForm('profile/profile.html.twig', [
             'controller_name' => 'ProfileController',
-            'factures' => $factures
+            'factures' => $factures,
+            'chevals' => $cheval
         ]);
     }
 

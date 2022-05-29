@@ -32,6 +32,11 @@ class Cheval
      */
     private $idUser;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +73,18 @@ class Cheval
     public function setIdUser(?user $idUser): self
     {
         $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

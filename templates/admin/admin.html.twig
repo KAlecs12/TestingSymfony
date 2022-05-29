@@ -17,9 +17,10 @@
             <div class="profile-form">
                 <div class="col-sm-9">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#linkcheval">Lier un Cheval</a></li>
+                        <li class="active"><a data-toggle="tab" href="#linkcheval">Les Chevaux</a></li>
                         <li><a data-toggle="tab" href="#messages">Facturations</a></li>
-                        <li><a data-toggle="tab" href="#settings">Ajouter Client</a></li>
+                        <li><a data-toggle="tab" href="#settings">Espace Client</a></li>
+
 
 
                     </ul>
@@ -29,18 +30,32 @@
                         <div class="tab-pane active" id="linkcheval">
                             <div class="container">
                                 <div class="row">
-                                    <h1 style="color: white">Lier un Cheval a un client</h1>
+                                    <h1 style="color: white; margin-top: 50px">Lier un Cheval a un client</h1>
                                     {{ form_start(form4) }}
                                     {{ form_row(form4.nom) }}
-                                    {{ form_row(form4.firstName) }}
+                                    {{ form_row(form4.id) }}
                                     <button type="submit" class="btn">Register</button>
                                     {{ form_end(form4) }}
-                                    <h1 style="color: white">Ajouter un Cheval</h1>
-                                    {{ form_start(form3) }}
-                                    {{ form_row(form3.nom) }}
-                                    {{ form_row(form3.box) }}
-                                    <button type="submit" class="btn">Register</button>
-                                    {{ form_end(form3) }}
+
+                                    <div style="display: flex; margin-top: 50px">
+                                        <div style="margin-right: 150px">
+                                            <h1 style="color: white; margin-bottom: 35px">Ajouter un Cheval</h1>
+                                            {{ form_start(form3) }}
+                                            {{ form_row(form3.nom) }}
+                                            {{ form_row(form3.box) }}
+                                            <button type="submit" class="btn">Ajouter</button>
+                                            {{ form_end(form3) }}
+                                        </div>
+                                        <div>
+                                            <h1 style="color: white">Modifier un Cheval</h1>
+                                            {{ form_start(form5) }}
+                                            {{ form_row(form5.id) }}
+                                            {{ form_row(form5.nom) }}
+                                            {{ form_row(form5.box) }}
+                                            <button style="background-color: coral " type="submit" class="btn">Modifier</button>
+                                            {{ form_end(form5) }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -56,7 +71,7 @@
                                         <h1 style="color: white">Ajouter une Facturation</h1>
 
                                 {{ form_start(form) }}
-                                {{ form_row(form.firstName) }}
+                                {{ form_row(form.id) }}
                                 <br>
                                 {{ form_row(form.imageFilename) }}
                                 <br>
@@ -73,14 +88,25 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="bg-light mt-4 p-4">
-                                        <h1 style="color: white">Register</h1>
+                                        <div style="display: flex; margin-top: 50px">
+                                            <div style="margin-right: 150px">
+                                                <h1 style="color: white;">Enregistrer</h1>
 
-                                        {{ form_start(form2) }}
-                                        {{ form_row(form2.firstName) }}
-                                        {{ form_row(form2.lastName) }}
-                                        {{ form_row(form2.email) }}
-                                        <button type="submit" class="btn">Register</button>
-                                        {{ form_end(form2) }}
+                                                {{ form_start(form2) }}
+                                                {{ form_row(form2.firstName) }}
+                                                {{ form_row(form2.lastName) }}
+                                                {{ form_row(form2.email) }}
+                                                <button type="submit" class="btn">Valider</button>
+                                                {{ form_end(form2) }}
+                                            </div>
+                                            <div>
+                                                <h1 style="color: white">Supprimer</h1>
+                                                {{ form_start(form6) }}
+                                                {{ form_row(form6.id) }}
+                                                <button style="background: #B0413E" type="submit" class="btn">Supprimer</button>
+                                                {{ form_end(form6) }}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

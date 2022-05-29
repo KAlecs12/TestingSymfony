@@ -34,7 +34,7 @@ class User implements UserInterface
      */
     private $firstName;
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $password;
     private $plainPassword;
@@ -63,6 +63,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Cheval::class, mappedBy="idUser")
      */
     private $cheval;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
 
     public function __construct()
     {
@@ -279,6 +284,18 @@ class User implements UserInterface
                 $chevals->setIdUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

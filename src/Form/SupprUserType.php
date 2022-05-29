@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Cheval;
 use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -11,17 +10,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
-class LinkHorseType extends AbstractType
+
+class SupprUserType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', EntityType::class, [
-                'label' => 'Selection du Cheval : ',
-                'mapped' => false,
-                'class' => Cheval::class,
-                'choice_label' => 'nom'
-            ])
             ->add('id', EntityType::class, [
                 'label' => 'Selection du Client : ',
                 'mapped' => false,
@@ -38,7 +33,7 @@ class LinkHorseType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Cheval::class,
+            'data_class' => User::class,
         ]);
     }
 }
