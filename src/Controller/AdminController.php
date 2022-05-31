@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Article;
+
 use App\Entity\Cheval;
+use App\Entity\Contact;
 use App\Entity\Facture;
 use App\Entity\User;
 use App\Form\AddFileFormType;
@@ -96,10 +97,10 @@ class AdminController extends AbstractController
 
             // Contenu du mail
             $email = (new Email())
-                ->from('onlylanelol@gmail.com')
+                ->from('ecurie.persevere.uf@gmail.com')
                 ->to($user->getEmail())
                 ->subject('Bienvenue a l\'ecurie persevere !')
-                ->text("\nRavie de vous avoir parmis nous {$user->getFirstName()}! ❤️ \n" . $signatureComponents->getSignedUrl());
+                ->text("\n\nRavie de vous avoir parmis nous {$user->getFirstName()}! ❤️ \n\nCliquez sur le lien afin de créer votre mot de passe : " . $signatureComponents->getSignedUrl());
 
             $mailer->send($email);
 
@@ -251,7 +252,7 @@ class AdminController extends AbstractController
             $entityManager->flush();
 
 
-            return $this->redirectToRoute('app_profile');
+            return $this->redirectToRoute('app_login');
         }
 
 
@@ -261,5 +262,18 @@ class AdminController extends AbstractController
         ]);
     }
 
+    #[Route('/admin/users/list', name: 'app_userlist')]
+    public function userslist(EntityManagerInterface $entityManager): Response
+    {
+
+// On recupere tous les users pour les affichers si ils sont presents
+        $users = $entityManager
+            ->getRepository(User::class)
+            ->findBy(array('status' => "ok"));
+
+        return $this->render('admin/users.html.twig', [
+            'users' => $users
+        ]);
+    }
 
 }

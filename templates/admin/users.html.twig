@@ -1,0 +1,19 @@
+{# Template général de la page #}
+{% extends 'base.html.twig' %}
+
+{# Titre de la page #}
+{% block title %}Mon profil{% endblock %}
+
+{# Ici vous mettez vos codes HTML et balises Twig au besoin #}
+{% block body %}
+
+    <div class="profile-container">
+        <div class="profile-form">
+            {% for user in users %}
+                <div style="color: white">{{ user.lastName }}</div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -43,3 +43,8 @@ security:
        - { path: ^/admin, roles: ROLE_ADMIN }
        - { path: ^/calendar, roles: ROLE_ADMIN }
        - { path: ^/profile, roles: ROLE_USER }
+       - { path: ^/rdv, roles: ROLE_USER }
+       - { path: ^/contact/pro, roles: ROLE_PRO }
+
+    role_hierarchy:
+        ROLE_ADMIN: [ ROLE_USER,ROLE_PRO ]

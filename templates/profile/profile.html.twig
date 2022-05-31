@@ -7,8 +7,6 @@
 {# Ici vous mettez vos codes HTML et balises Twig au besoin #}
 {% block body %}
 
-
-
         <div class="profile-container">
             <div class="profile-form">
                 <br>
@@ -16,14 +14,13 @@
                     <div class="row">
                         <div class="col-sm-3" style="margin-left: -150px;">
 
-                            <div class="panel panel-default">
-                                <div style="color: #aec676 ; font-size: 2em; background-color: #EEE6D8" class="panel-heading">Informations <i class="fa fa-link fa-1x"></i></div>
-                                <li class="list-group-item">{{ app.user.firstName }}</li>
-                                <li class="list-group-item ">{{ app.user.lastName }}</li>
-                                <li class="list-group-item ">{{ app.user.email }}</li>
+                            <div class="left-info">
+                                <h2>{{ app.user.firstName }}</h2>
+                                <p>{{ app.user.lastName }}</p>
+                                <p>{{ app.user.email }}</p>
+                                <p>13100</p>
+                                <p>Aix-en-Provence</p>
                             </div>
-
-
 
                         </div>
 
