@@ -267,11 +267,13 @@ class AdminController extends AbstractController
     #[Route('/admin/users/list', name: 'app_userlist')]
     public function userslist(EntityManagerInterface $entityManager, Request $request, UserRepository $repo): Response
     {
-
+        $user = [];
 // On recupere tous les users pour les affichers si ils sont presents
-        $query = $request->request->all('form')['query'];
-        if($query) {
-            $user = $repo->findUsersByName($query);
+        if($request->isMethod('POST')) {
+            $query= $request->request->all('form')['query'];
+            if($query) {
+                $user = $repo->findUsersByName($query);
+            }
         }
 
         $users = $entityManager
@@ -310,6 +312,21 @@ class AdminController extends AbstractController
         
         return $this->render('admin/searchBar.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/handleSearch", name="handleSearch")
+     * @param Request $request
+     */
+    public function handleSearch(Request $request, UserRepository $repo)
+    {
+        $query = $request->request->all('form')['query'];
+        if($query) {
+            $user = $repo->findUsersByName($query);
+        }
+        return $this->render('admin/users.html.twig', [
+            'user' => $user
         ]);
     }
 
