@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\Cheval;
 use App\Entity\Facture;
 use App\Entity\User;
@@ -52,7 +53,7 @@ class AdminController extends AbstractController
         $form5->handleRequest($request);
         $form6->handleRequest($request);
 
-        //Pour l'envoie du PDF a un Utilisateur
+//Pour l'envoie du PDF a un Utilisateur
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $uploadedFile */
@@ -77,7 +78,7 @@ class AdminController extends AbstractController
 
             return $this->redirectToRoute('app_admin');
 
-            // Creation d'un user, en envoyant un mail a la personne pour qu'elle ajoute son mdp
+// Creation d'un user, en envoyant un mail a la personne pour qu'elle ajoute son mdp
         } else if ($form2->isSubmitted() && $form2->isValid()) {
 
             $user->setStatus("ok");
@@ -106,7 +107,7 @@ class AdminController extends AbstractController
 
             return $this->redirectToRoute('app_admin');
 
-            //Ajout d'un cheval
+// Ajout d'un cheval
         } else if ($form3->isSubmitted() && $form3->isValid()) {
 
             $cheval->setStatus("ok");
@@ -116,7 +117,7 @@ class AdminController extends AbstractController
 
             return $this->redirectToRoute('app_admin');
 
-            //Lier un cheval a un client
+//Lier un cheval a un client
         } else if ($form4->isSubmitted() && $form4->isValid()) {
 
             $cheval = $entityManager
@@ -137,6 +138,7 @@ class AdminController extends AbstractController
             }
 
             return $this->redirectToRoute('app_admin');
+// Modifier un Cheval
         } else if ($form5->isSubmitted() && $form5->isValid()) {
 
             $cheval = $entityManager
@@ -162,7 +164,7 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('app_admin');
 
-        //Supprimer un client
+//Supprimer un client
     } else if ($form6->isSubmitted() && $form6->isValid()) {
 
             $user = $entityManager
@@ -178,15 +180,37 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('app_admin');
         }
 
+// On recupere tous les chevaux pour les affichers si ils sont presents
+        $chevaux = $entityManager
+            ->getRepository(Cheval::class)
+            ->findBy(array('status' => "ok"));
+
         return $this->renderForm('admin/admin.html.twig', [
             'form' => $form,
             'form2' => $form2,
             'form3' => $form3,
             'form4' => $form4,
             'form5' => $form5,
-            'form6' => $form6
+            'form6' => $form6,
+            'chevaux' => $chevaux
         ]);
     }
+
+
+    #[Route('/delete/{id}', name: 'app_delete')]
+    public function delete($id,EntityManagerInterface $entityManager): Response
+    {
+
+        $cheval = $entityManager
+            ->getRepository(Cheval::class)
+            ->find($id);
+
+        $cheval->setStatus("suppr");
+        $entityManager->persist($cheval);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_admin');
+    }
+
 
     /**
      * @Route("/verify", name="app_verify_email")
@@ -236,5 +260,6 @@ class AdminController extends AbstractController
 
         ]);
     }
+
 
 }

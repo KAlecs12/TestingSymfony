@@ -14,17 +14,17 @@
         <div class="vertical-alignment-helper">
             <div class="modal-dialog vertical-align-center">
                 <div class="modal-content ">
-                    {{ form_start(form2) }}
                     <div class="modal-header">
                         <h4 id="modalTitle" class="modal-title">Prendre le rendez-vous</h4>
                     </div>
                     <div id="modalBody" class="modal-body">
-                    </div>    {{ form_row(form2.id) }}
+
+                        <h1>{{ user.firstName }}, voulez vous accepter ce rendez-vous ?</h1>
+
                         <br>
-                        <button type="submit" class="btn btn-primary">Accepter ✅</button>
+                        <input type="submit" id="button" class="btn btn-primary" value="Accepter ✅">
+                    </div>
 
-
-                    {{ form_end(form2) }}
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
     <div id="modelWindow" class="modal fade">
         <div class="vertical-alignment-helper">
             <div class="modal-dialog vertical-align-center">
@@ -96,10 +96,27 @@
             allDaySlot: false,
             eventClick:  function(event, jsEvent, view) {
 
-                $('#get_rdv_id').html(event.event.id);
+                {#let url = '{{ path("app_getrdv", {'id': 'rdv_id'}) }}';#}
+                {#url = url.replace("rdv_id", (event.event.id);#}
+                {#text += '<a class="btn btn-primary" href='+ url +' >Accepter ✅</a>';#}
+
+                {#document.getElementById("returnrdv").innerHTML = text;#}
+
+                // $('#formrdv').submit(event.event.id);
                 $('#modalBody').html(event.event.description);
                 $('#calendarModal').modal("show");
-            },
+
+                document.getElementById('button').onclick = function() {
+                    $.ajax({
+                        url: "/rdv/get/",
+                        type: "POST",
+                        data: {"myData": event.event.id}
+                    }).done(function (data) {
+                        console.log(data);
+                    });
+                    $('#calendarModal').modal("hide");
+                }
+                },
         })
 
         calendar.render()

@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\Calendar;
 use App\Entity\Facture;
 use App\Entity\User;
+use App\Form\AddArticleType;
 use App\Form\AddFileFormType;
 use App\Form\CalendarType;
 use App\Form\GetRdvType;
@@ -20,8 +22,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+
 class RdvController extends AbstractController
 {
+
 
     #[Route('/rdv', name: 'app_rdv')]
     public function index( CalendarRepository $calendarRepository, Request $request, ManagerRegistry $doctrine): Response
@@ -45,25 +49,6 @@ class RdvController extends AbstractController
 
         $data = json_encode($rdvs);
 
-        //choisir un rdv pour soi-meme
-        $calendar = new Calendar();
-        $form2 = $this->createForm(GetRdvType::class, $calendar);
-        $form2->handleRequest($request);
-
-
-        if ($form2->isSubmitted() && $form2->isValid()) {
-
-            $user = $this->getUser();
-            $calendar = $form2->get('id')->getData();
-            $rdv = $calendarRepository->find(array('id' => $calendar));
-            $rdv->setIdUser($user);
-
-                $entityManager = $doctrine->getManager();
-                $entityManager->persist($rdv);
-                $entityManager->flush();
-
-            return $this->redirectToRoute('app_rdv');
-        }
 
         // ajouter rapidement un rdv, pour l'admin
         $calendaradd = new Calendar();
@@ -93,12 +78,32 @@ class RdvController extends AbstractController
             return $this->redirectToRoute('app_rdv', [], Response::HTTP_SEE_OTHER);
         }
 
+        $user = $this->getUser();
+
         return $this->renderForm('rdv/rdv.html.twig', [
             'data' => $data,
             'form' => $form,
-            'form2' => $form2
-        ]);
+            'user' => $user
 
+        ]);
+    }
+
+    #[Route('rdv/get/', name: 'app_getrdv')]
+    public function getrdv(Request $request,EntityManagerInterface $entityManager): Response
+    {
+        // On recupere la variable myData depuis le script Jquery dans le twig rdv et on envoie le user dans le rendez-vous
+        $data = isset($_REQUEST['myData'])?$_REQUEST['myData']:"";
+        $calendar = $entityManager
+            ->getRepository(Calendar::class)
+            ->find($data);
+
+        $user = $this->getUser();
+        $calendar->setidUser($user);
+
+        $entityManager->persist($calendar);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_rdv');
     }
 
 }

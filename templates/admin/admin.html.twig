@@ -26,36 +26,134 @@
                     </ul>
 
                     <!-- MENU 1 -->
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="linkcheval">
-                            <div class="container">
-                                <div class="row">
-                                    <h1 style="color: white; margin-top: 50px">Lier un Cheval a un client</h1>
-                                    {{ form_start(form4) }}
-                                    {{ form_row(form4.nom) }}
-                                    {{ form_row(form4.id) }}
-                                    <button type="submit" class="btn">Register</button>
-                                    {{ form_end(form4) }}
 
-                                    <div style="display: flex; margin-top: 50px">
+                    <div id="AddHorseModal" class="modal fade">
+                        <div class="vertical-alignment-helper">
+                            <div class="modal-dialog vertical-align-center">
+                                <div class="modal-content ">
+                                    <div class="modal-header">
+                                        <h1>Ajouter un Cheval a la liste</h1>
+                                    </div>
+                                    <div id="modalBody" class="modal-body">
                                         <div style="margin-right: 150px">
-                                            <h1 style="color: white; margin-bottom: 35px">Ajouter un Cheval</h1>
                                             {{ form_start(form3) }}
                                             {{ form_row(form3.nom) }}
                                             {{ form_row(form3.box) }}
-                                            <button type="submit" class="btn">Ajouter</button>
+                                            <button style="background-color: darkseagreen; border-color: #aec676" type="submit" class="btn">Ajouter ✅</button>
                                             {{ form_end(form3) }}
                                         </div>
-                                        <div>
-                                            <h1 style="color: white">Modifier un Cheval</h1>
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="EditHorseModal" class="modal fade">
+                        <div class="vertical-alignment-helper">
+                            <div class="modal-dialog vertical-align-center">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1>Modifier un Cheval de la liste</h1>
+                                    </div>
+                                    <div style="margin-bottom: 20px" id="modalBody" class="modal-body">
+
                                             {{ form_start(form5) }}
                                             {{ form_row(form5.id) }}
+                                            <br>
                                             {{ form_row(form5.nom) }}
                                             {{ form_row(form5.box) }}
-                                            <button style="background-color: coral " type="submit" class="btn">Modifier</button>
+                                            <button style="background-color: coral; border-color: #aec676" type="submit" class="btn">Modifier ✅</button>
                                             {{ form_end(form5) }}
-                                        </div>
+
                                     </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="LinkHorseModal" class="modal fade">
+                        <div class="vertical-alignment-helper">
+                            <div class="modal-dialog vertical-align-center">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1>Lier un Cheval a un client</h1>
+                                    </div>
+                                    <div style="margin-bottom: 20px" id="modalBody" class="modal-body">
+                                        <br>
+                                            {{ form_start(form4) }}
+                                            {{ form_row(form4.nom) }}
+                                            {{ form_row(form4.id) }}
+                                            <br>
+                                            <button style="background-color: darkseagreen; border-color: #aec676" type="submit" class="btn">Register</button>
+                                            {{ form_end(form4) }}
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div style="display: flex;justify-content: center;flex-wrap: wrap;" class="tab-content">
+
+
+                        <div  class="tab-pane active" id="linkcheval">
+                            <div style="margin-bottom: 20px">
+                                <ul>
+                                    <a style="padding: 8px; margin-right:15px; background-color: #efefef; border-radius: 5px; color: #120e01;font-weight: 400;" data-toggle="modal" data-target="#AddHorseModal" class="nav-link white" href="#">Ajouter un Cheval</a>
+
+                                    <a style="padding: 8px; background-color: #efefef; border-radius: 5px; color: #120e01;font-weight: 400;" data-toggle="modal" data-target="#LinkHorseModal" class="nav-link white" href="#">Lier un Cheval a un client</a>
+                                </ul>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+
+                                    <table class="tg" style="table-layout: fixed; width: 1027px">
+                                        <colgroup>
+                                            <col style="width: 139px">
+                                            <col style="width: 426px">
+                                            <col style="width: 163px">
+                                            <col style="width: 299px">
+                                            <col style="width: 250px">
+                                        </colgroup>
+                                        <thead>
+                                        <tr>
+                                            <th class="tg-31jn">Id</th>
+                                            <th class="tg-31jn">Nom du cheval</th>
+                                            <th class="tg-31jn">Box</th>
+                                            <th class="tg-31jn">Clients</th>
+                                            <th class="tg-31jn">Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for cheval in chevaux %}
+                                            <tr>
+                                                <td class="tg-u7af">{{ cheval.id }}</td>
+                                                <td class="tg-u7af">{{ cheval.nom }}</td>
+                                                <td class="tg-u7af">{{ cheval.box }}</td>
+                                                <td class="tg-u7af">{% if cheval.idUser != null %} {{ cheval.idUser.firstName }} {% endif %} </td>
+                                                <td class="tg-u7af">
+                                                     <a style="background-color: #efefef; border-radius: 5px; color: #120e01;font-weight: 400;" data-toggle="modal" data-target="#EditHorseModal" class="nav-link white" href="#">Modifier un Cheval</a>
+                                                     <a style="background-color: #efefef; border-radius: 5px; color: #120e01;font-weight: 400;"  class="nav-link white" href="{{ path("app_delete", {'id' : cheval.id }) }}">Supprimer le Cheval</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+
                                 </div>
                             </div>
                         </div>

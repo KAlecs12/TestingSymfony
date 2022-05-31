@@ -278,7 +278,7 @@ class User implements UserInterface
 
     public function removeCheval(Cheval $chevals): self
     {
-        if ($this->calendars->removeElement($chevals)) {
+        if ($this->cheval->removeElement($chevals)) {
             // set the owning side to null (unless already changed)
             if ($chevals->getIdUser() === $this) {
                 $chevals->setIdUser(null);
