@@ -28,6 +28,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 #[Route('/')]
 class AdminController extends AbstractController
@@ -263,16 +265,51 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin/users/list', name: 'app_userlist')]
-    public function userslist(EntityManagerInterface $entityManager): Response
+    public function userslist(EntityManagerInterface $entityManager, Request $request, UserRepository $repo): Response
     {
 
 // On recupere tous les users pour les affichers si ils sont presents
+        $query = $request->request->all('form')['query'];
+        if($query) {
+            $user = $repo->findUsersByName($query);
+        }
+
         $users = $entityManager
             ->getRepository(User::class)
             ->findBy(array('status' => "ok"));
 
         return $this->render('admin/users.html.twig', [
+            'user' => $user,
             'users' => $users
+        ]);
+    }
+
+    public function searchBar(Request $request)
+    {
+        $form = $this->createFormBuilder()
+            ->add('query', TextType::class, [
+                'label' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Recherche...'
+                ]
+            ])
+            ->add('recherche', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary'
+                ]
+            ])
+            ->getForm();
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            return $this->redirectToRoute('app_userlist');
+        }
+ 
+        
+        return $this->render('admin/searchBar.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 

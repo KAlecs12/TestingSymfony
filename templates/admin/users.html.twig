@@ -29,6 +29,18 @@
 
     <div class="profile-container">
         <div style="    margin-top: 65%;" class="profile-form">
+            {{ render(controller( 'App\\Controller\\AdminController::searchBar' )) }}
+            {% if user | length == 0 %}
+                <h4>Aucun résultat pour votre recherche.</h4>
+             {% else %}
+                <h3 class="mt-3">Vos résultats de recherche :</h3>
+                {% for search in user %}
+                    <div class="mt-3 p-3 bg-light border rounded">
+                        <h6 class="text-light"><i class="bi bi-arrow-down-right-square-fill text-primary"></i> {{ search.lastName }}</h6>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
             <div class="col-md-8">
                 <div style="margin-top: 20px" class="people-nearby">
                     {% for user in users %}
