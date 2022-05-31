@@ -7,12 +7,48 @@
 {# Ici vous mettez vos codes HTML et balises Twig au besoin #}
 {% block body %}
 
-    <div class="profile-container">
-        <div class="profile-form">
-            {% for user in users %}
-                <div style="color: white">{{ user.lastName }}</div>
-            {% endfor %}
+    <div id="UserModal" class="modal fade">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>Fiche du client</h1>
+                    </div>
+                    <div style="margin-bottom: 20px" id="modalBody" class="modal-body">
 
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-container">
+        <div style="    margin-top: 65%;" class="profile-form">
+            <div class="col-md-8">
+                <div style="margin-top: 20px" class="people-nearby">
+                    {% for user in users %}
+                        <div class="nearby-user">
+                            <div class="row">
+                                <div class="col-md-2 col-sm-2">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
+                                </div>
+                                <div class="col-md-7 col-sm-7">
+                                    <h4 style="color: #aec676" class="profile-link">{{ user.lastName }} {{ user.firstName }}</h4>
+                                    <p>{{ user.email }}</p>
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+                                    <a style="background-color: #aec676; color: #120e01" data-toggle="modal" data-target="#UserModal" class="btn btn-primary pull-right" href="#">Détails</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 

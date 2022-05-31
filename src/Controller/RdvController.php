@@ -31,7 +31,7 @@ class RdvController extends AbstractController
     public function index( CalendarRepository $calendarRepository, Request $request, ManagerRegistry $doctrine): Response
     {
 
-        $events = $calendarRepository->findAll();
+        $events = $calendarRepository->findBy(array('deleted' => 0));
 
         $rdvs = [];
         foreach ($events as $event){
@@ -44,6 +44,7 @@ class RdvController extends AbstractController
                 'backgroundColor' => $event->getBackgroundColor(),
                 'borderColor' => $event->getBorderColor(),
                 'textColor' => $event->getTextColor(),
+                'dispo' => $event->getDispo(),
             ];
         }
 
@@ -64,16 +65,20 @@ class RdvController extends AbstractController
                 $calendaradd->setBackgroundColor("#7AA95C");
                 $calendaradd->setBorderColor("#18534F");
                 $calendaradd->setTextColor("#000000");
+                $calendaradd->setDispo(0);
             }
             else{
                 $calendaradd->setBackgroundColor("#9AC8EB");
                 $calendaradd->setBorderColor("#212E53");
                 $calendaradd->setTextColor("#000000");
+                $calendaradd->setDispo(0);
             }
 
             $entityManager = $doctrine->getManager();
             $entityManager->persist($calendaradd);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Rendez-vous ajouté avec succès.');
 
             return $this->redirectToRoute('app_rdv', [], Response::HTTP_SEE_OTHER);
         }
@@ -97,11 +102,38 @@ class RdvController extends AbstractController
             ->getRepository(Calendar::class)
             ->find($data);
 
-        $user = $this->getUser();
-        $calendar->setidUser($user);
+            $user = $this->getUser();
+            $calendar->setidUser($user);
+            $calendar->setbackgroundColor("#B22222");
+            $calendar->setDispo(1);
+            // On recup le titre pour l'afficher dans le flash
+            $titre = $calendar->getTitle();
 
+            $entityManager->persist($calendar);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Rendez-vous pour ' . $titre . ' accepté.');
+
+        return $this->redirectToRoute('app_rdv');
+    }
+
+    #[Route('rdv/delete/', name: 'app_deleterdv')]
+    public function deleterdv(EntityManagerInterface $entityManager): Response
+    {
+        $data = isset($_REQUEST['myData'])?$_REQUEST['myData']:"";
+
+        $calendar = $entityManager
+            ->getRepository(Calendar::class)
+            ->find($data);
+
+        // On recup le titre pour l'afficher dans le flash
+        $titre = $calendar->getTitle();
+
+        $calendar->setDeleted(1);
         $entityManager->persist($calendar);
         $entityManager->flush();
+
+        $this->addFlash('success', 'Rendez-vous pour '.$titre.' supprimé.');
 
         return $this->redirectToRoute('app_rdv');
     }

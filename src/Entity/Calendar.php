@@ -62,6 +62,16 @@ class Calendar
      */
     private $type;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $dispo;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $deleted;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -171,6 +181,30 @@ class Calendar
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getDispo(): ?bool
+    {
+        return $this->dispo;
+    }
+
+    public function setDispo(bool $dispo): self
+    {
+        $this->dispo = $dispo;
+
+        return $this;
+    }
+
+    public function getDeleted(): ?bool
+    {
+        return $this->deleted;
+    }
+
+    public function setDeleted(bool $deleted): self
+    {
+        $this->deleted = $deleted;
 
         return $this;
     }

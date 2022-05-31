@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"
             integrity="sha256-XCdgoNaBjzkUaEJiauEq+85q/xi/2D4NcB3ZHwAapoM=" crossorigin="anonymous"></script>
 
-    <!-- Modal -->
+    <!-- Modal Prendre rdv -->
 
     <div id="calendarModal" class="modal fade">
         <div class="vertical-alignment-helper">
@@ -19,10 +19,14 @@
                     </div>
                     <div id="modalBody" class="modal-body">
 
-                        <h1>{{ user.firstName }}, voulez vous accepter ce rendez-vous ?</h1>
 
+                        <h1>{{ user.firstName }}, voulez vous accepter ce rendez-vous ?</h1>
+                        <div id="id"></div>
                         <br>
-                        <input type="submit" id="button" class="btn btn-primary" value="Accepter ✅">
+                        <a href="{{ path('app_rdv') }}" type="submit" id="button" class="btn btn-primary" >Accepter ✅</a>
+
+                        <a href="{{ path('app_rdv') }}" type="submit" id="suppr" class="btn btn-primary" >Supprimer ❌</a>
+
                     </div>
 
                     <div class="modal-footer">
@@ -32,6 +36,32 @@
                 </div>
             </div>
         </div>
+
+    <!-- Modal RDV pas dispo -->
+
+    <div id="calendarModal2" class="modal fade">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h4 id="modalTitle" class="modal-title">Rendez-vous plus disponible</h4>
+                    </div>
+                    <div id="modalBody" class="modal-body">
+
+
+                        <h1>{{ user.firstName }}, ce rendez-vous n'est plus disponible !</h1>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ajouter RDV -->
 
     <div id="modelWindow" class="modal fade">
         <div class="vertical-alignment-helper">
@@ -55,6 +85,12 @@
     </div>
 
     <div class="profile-container">
+        {% for flash in app.flashes('success') %}
+            <div class="alert alert-success">{{ flash }}</div>
+        {% endfor %}
+        {% for flash in app.flashes('error') %}
+            <div class="alert alert-danger">{{ flash }}</div>
+        {% endfor %}
             <ul style="margin-top: 20px">
                 {% if is_granted('ROLE_ADMIN') %}
                     <li style="margin-left: 15px">
@@ -96,26 +132,33 @@
             allDaySlot: false,
             eventClick:  function(event, jsEvent, view) {
 
-                {#let url = '{{ path("app_getrdv", {'id': 'rdv_id'}) }}';#}
-                {#url = url.replace("rdv_id", (event.event.id);#}
-                {#text += '<a class="btn btn-primary" href='+ url +' >Accepter ✅</a>';#}
+                if (event.event.extendedProps.dispo === false) {
+                    $('#id').html(event.event);
+                    $('#modalBody').html(event.event.description);
+                    $('#calendarModal').modal("show");
 
-                {#document.getElementById("returnrdv").innerHTML = text;#}
-
-                // $('#formrdv').submit(event.event.id);
-                $('#modalBody').html(event.event.description);
-                $('#calendarModal').modal("show");
-
-                document.getElementById('button').onclick = function() {
-                    $.ajax({
-                        url: "/rdv/get/",
-                        type: "POST",
-                        data: {"myData": event.event.id}
-                    }).done(function (data) {
-                        console.log(data);
-                    });
-                    $('#calendarModal').modal("hide");
+                    document.getElementById('button').onclick = function () {
+                        $.ajax({
+                            url: "/rdv/get/",
+                            type: "POST",
+                            data: {"myData": event.event.id}
+                        }).done(function (data) {
+                            console.log(data);
+                        });
+                    }
+                    document.getElementById('suppr').onclick = function () {
+                        $.ajax({
+                            url: "/rdv/delete/",
+                            type: "POST",
+                            data: {"myData": event.event.id}
+                        }).done(function (data) {
+                            console.log(data);
+                        });
+                    }
+                } else {
+                    $('#calendarModal2').modal("show");
                 }
+
                 },
         })
 

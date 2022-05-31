@@ -50,7 +50,7 @@ body {
 .profile-form {
     display: flex;
     flex-direction: column;
-    height: 80%;
+    height: auto;
     align-items: center;
     /*background-color: #4b432a;*/
     background-color: #503d27;
@@ -464,3 +464,20 @@ textarea {
 .tg .tg-31jn{border-color:inherit;font-family:Georgia, serif !important;font-size:26px;text-align:center;vertical-align:top}
 .tg .tg-u7af{border-color:inherit;font-family:Tahoma, Geneva, sans-serif !important;font-size:22px;text-align:center;
     vertical-align:top}
+
+/*==================================================
+  Nearby People CSS
+  ==================================================*/
+
+.people-nearby .nearby-user{
+    padding: 20px 0;
+    border-top: 1px solid #f1f2f2;
+    border-bottom: 1px solid #f1f2f2;
+    margin-bottom: 20px;
+}
+
+img.profile-photo-lg{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+}
