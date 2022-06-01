@@ -128,7 +128,6 @@ body {
     margin-bottom: 20px;
 }
 .profile-form input[type="text"] {
-    padding: 15px 80px;
     margin-right: 10px;
     margin-bottom: 20px;
     outline: none;
@@ -430,7 +429,7 @@ input#add_file_form_imageFilename{
 
 }
 
-textarea {
+.modal textarea {
     vertical-align: top;
     min-width : 300px;
     min-height : 200px;
@@ -461,9 +460,8 @@ textarea {
     font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
 .tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:1px;color:#333;
     font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-31jn{border-color:inherit;font-family:Georgia, serif !important;font-size:26px;text-align:center;vertical-align:top}
-.tg .tg-u7af{border-color:inherit;font-family:Tahoma, Geneva, sans-serif !important;font-size:22px;text-align:center;
-    vertical-align:top}
+.tg .tg-31jn{border-color:inherit;font-family:Georgia, serif !important;font-size:26px;text-align:center;}
+.tg .tg-u7af{border-color:inherit;font-family:Tahoma, Geneva, sans-serif !important;font-size:22px;text-align:center;}
 
 /*==================================================
   Nearby People CSS
@@ -480,4 +478,21 @@ img.profile-photo-lg{
     height: 80px;
     width: 80px;
     border-radius: 50%;
+}
+
+
+.shadow-textarea textarea.form-control::placeholder {
+    font-weight: 300;
+}
+.shadow-textarea textarea.form-control {
+    padding-left: 0.8rem;
+}
+
+.form-group textarea {
+    vertical-align: top;
+    min-width : 825px;
+    min-height : 420px;
+    max-width : 825px;
+    max-height : 420px;
+
 }

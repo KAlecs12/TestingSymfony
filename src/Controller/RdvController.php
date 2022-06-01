@@ -66,12 +66,14 @@ class RdvController extends AbstractController
                 $calendaradd->setBorderColor("#18534F");
                 $calendaradd->setTextColor("#000000");
                 $calendaradd->setDispo(0);
+                $calendaradd->setDeleted(0);
             }
             else{
                 $calendaradd->setBackgroundColor("#9AC8EB");
                 $calendaradd->setBorderColor("#212E53");
                 $calendaradd->setTextColor("#000000");
                 $calendaradd->setDispo(0);
+                $calendaradd->setDeleted(0);
             }
 
             $entityManager = $doctrine->getManager();

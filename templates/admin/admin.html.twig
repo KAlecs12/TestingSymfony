@@ -14,7 +14,7 @@
             {% for flash in app.flashes('error') %}
                 <div class="alert alert-danger">{{ flash }}</div>
             {% endfor %}
-            <div class="profile-form">
+            <div style="min-height: 60%" class="profile-form">
                 <div class="col-sm-9">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#linkcheval">Les Chevaux</a></li>
@@ -61,7 +61,7 @@
                                     <div style="margin-bottom: 20px" id="modalBody" class="modal-body">
 
                                             {{ form_start(form5) }}
-                                            {{ form_row(form5.id) }}
+                                            {{ form_row(form5.id, {'attr': {'class': 'form-control'}})  }}
                                             <br>
                                             {{ form_row(form5.nom) }}
                                             {{ form_row(form5.box) }}
@@ -88,8 +88,8 @@
                                     <div style="margin-bottom: 20px" id="modalBody" class="modal-body">
                                         <br>
                                             {{ form_start(form4) }}
-                                            {{ form_row(form4.nom) }}
-                                            {{ form_row(form4.id) }}
+                                            {{ form_row(form4.nom, {'attr': {'class': 'form-control'}})  }}
+                                            {{ form_row(form4.id, {'attr': {'class': 'form-control'}})  }}
                                             <br>
                                             <button style="background-color: darkseagreen; border-color: #aec676" type="submit" class="btn">Register</button>
                                             {{ form_end(form4) }}
@@ -167,7 +167,9 @@
                                         <h1 style="color: white">Ajouter une Facturation</h1>
 
                                 {{ form_start(form) }}
-                                {{ form_row(form.id) }}
+                                        <div style="width: 30%">
+                                {{ form_row(form.id, {'attr': {'class': 'form-control'}})  }}
+                                        </div>
                                 <br>
                                 {{ form_row(form.imageFilename) }}
                                 <br>
@@ -198,7 +200,8 @@
                                             <div>
                                                 <h1 style="color: white">Supprimer</h1>
                                                 {{ form_start(form6) }}
-                                                {{ form_row(form6.id) }}
+                                                {{ form_row(form6.id, {'attr': {'class': 'form-control'}})  }}
+                                                <br>
                                                 <button style="background: #B0413E" type="submit" class="btn">Supprimer</button>
                                                 {{ form_end(form6) }}
                                             </div>

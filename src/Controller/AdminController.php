@@ -267,21 +267,19 @@ class AdminController extends AbstractController
     #[Route('/admin/users/list', name: 'app_userlist')]
     public function userslist(EntityManagerInterface $entityManager, Request $request, UserRepository $repo): Response
     {
-        $user = [];
-// On recupere tous les users pour les affichers si ils sont presents
-        if($request->isMethod('POST')) {
-            $query= $request->request->all('form')['query'];
-            if($query) {
-                $user = $repo->findUsersByName($query);
-            }
-        }
-
         $users = $entityManager
             ->getRepository(User::class)
             ->findBy(array('status' => "ok"));
 
+// On recupere tous les users pour les affichers si ils sont presents
+        if($request->isMethod('POST')) {
+            $query= $request->request->all('form')['query'];
+            if($query) {
+                $users = $repo->findUsersByName($query);
+            }
+        }
+
         return $this->render('admin/users.html.twig', [
-            'user' => $user,
             'users' => $users
         ]);
     }
@@ -328,6 +326,21 @@ class AdminController extends AbstractController
         return $this->render('admin/users.html.twig', [
             'user' => $user
         ]);
+    }
+
+    #[Route('/pro/{id}', name: 'app_pro')]
+    public function makepro($id, Request $request,EntityManagerInterface $entityManager): Response
+    {
+        $user = $entityManager
+            ->getRepository(User::class)
+            ->find($id);
+
+        $user->setRoles(['ROLE_PRO']);
+
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_userlist');
     }
 
 }

@@ -3,7 +3,34 @@
 {% block title %}Hello ContactController!{% endblock %}
 
 {% block body %}
-    <div class="entrance">
+
+
+    <div style="flex-direction: row; height: auto" class="profile-container">
+
+        <div style="width: 60%" class="profile-form">
+            <h1 style="color: #aec676">Ecrivez a un professionnel</h1>
+        <div style="margin-top: 20px; "  class="form-group green-border-focus">
+            {{ form_start(form) }}
+
+            {{ form_row(form.idPro, {'attr': {'class': 'form-control'}}) }}
+            <br>
+            {{ form_row(form.sujet, {'attr': { 'class': 'form-control'}}) }}
+            <br>
+            <label for="exampleFormControlTextarea5">Demande :</label>
+            <div class="form-group shadow-textarea">
+                {{ form_row(form.message, {'attr': {'placeholder': 'Ecrivez quelque chose ici...', 'class': 'form-control z-depth-1'}}) }}
+            </div>
+            <div style="display: flex; justify-content: center">
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+
+        </div>
+    </div>
+
+
+    <div  class="entrance">
         <div class="footer-container">
             <div class="left-side">
                 <img id="logoimg" src="{{ asset('images/logo.png')}}" alt="">

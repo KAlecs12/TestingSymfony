@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -69,6 +69,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $status;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Contact::class, mappedBy="idUser")
+     */
+    private $contacts;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Contact::class, mappedBy="idPro")
+     */
+    private $contactspro;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Telephone;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Adresse;
+
     public function __construct()
     {
         $this->id_stage = new ArrayCollection();
@@ -76,6 +96,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->contacts = new ArrayCollection();
         $this->factures = new ArrayCollection();
         $this->calendars = new ArrayCollection();
+        $this->contactspro = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -296,6 +317,90 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contact>
+     */
+    public function getContacts(): Collection
+    {
+        return $this->contacts;
+    }
+
+    public function addContact(Contact $contact): self
+    {
+        if (!$this->contacts->contains($contact)) {
+            $this->contacts[] = $contact;
+            $contact->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContact(Contact $contact): self
+    {
+        if ($this->contacts->removeElement($contact)) {
+            // set the owning side to null (unless already changed)
+            if ($contact->getIdUser() === $this) {
+                $contact->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contact>
+     */
+    public function getContactspro(): Collection
+    {
+        return $this->contactspro;
+    }
+
+    public function addContactspro(Contact $contactspro): self
+    {
+        if (!$this->contactspro->contains($contactspro)) {
+            $this->contactspro[] = $contactspro;
+            $contactspro->setIdPro($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContactspro(Contact $contactspro): self
+    {
+        if ($this->contactspro->removeElement($contactspro)) {
+            // set the owning side to null (unless already changed)
+            if ($contactspro->getIdPro() === $this) {
+                $contactspro->setIdPro(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->Telephone;
+    }
+
+    public function setTelephone(?string $Telephone): self
+    {
+        $this->Telephone = $Telephone;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->Adresse;
+    }
+
+    public function setAdresse(?string $Adresse): self
+    {
+        $this->Adresse = $Adresse;
 
         return $this;
     }
